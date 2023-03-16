@@ -1,0 +1,13 @@
+<!-- shop app css -->
+<!--<link href="{$wa_active_theme_url}css/order.css?v={$wa_theme_version}" rel="stylesheet">-->
+<!-- js -->
+<!--<script src="{$wa_active_theme_url}custom.shop.js?v{$wa_theme_version}"></script>-->
+<!--<script src="{$wa_static_url}wa-content/js/jquery-plugins/jquery.cookie.js?v{$wa->version(true)}"></script>-->
+{if !empty($nofollow)}
+    <!-- "nofollow" for pages not to be indexed, e.g. customer account -->
+    <meta name="robots" content="noindex,nofollow" >
+{/if}
+
+<!-- plugin hook: 'frontend_head' -->
+{* @event frontend_head.%plugin_id% *}
+{foreach $frontend_head as $_}{$_}{/foreach}

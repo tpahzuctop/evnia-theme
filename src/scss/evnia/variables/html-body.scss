@@ -1,0 +1,15 @@
+html,
+body {
+  width: 100%;
+  font-family: 'Montserrat', sans-serif, Arial;
+  font-size: 14px;
+  color: var(--white);
+  max-width: 100vw;
+  overflow-x: hidden;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+body {
+  background: var(--black);
+}

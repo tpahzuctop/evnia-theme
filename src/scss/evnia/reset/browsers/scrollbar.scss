@@ -1,0 +1,20 @@
+::-webkit-scrollbar {
+  width: .35rem;
+  height: .35rem;
+  background: var(--white-75);
+}
+::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--base-color-dark-hover);
+}
+::-webkit-scrollbar-corner {
+  background: var(--white-75);
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: var(--white-75);
+}

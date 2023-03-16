@@ -1,0 +1,212 @@
+.call-b-bg {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  background: var(--white-98);
+  width: 100% !important;
+  height: 100%;
+  z-index: 9989 !important;
+}
+
+.call-b-form {
+  z-index: 9992;
+  min-width: 280px;
+  width: 85vw;
+  max-width: 300px;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  background: var(--black) !important;
+  border: none;
+  left: 0;
+  margin-left: 0;
+  margin-top: 0;
+  position: fixed;
+  top: 0 !important;
+  @media (min-width: 768px) {
+    border: var(--border-size) solid var(--base-color-dark-hover);
+    border-radius: var(--border-radius);
+    height: 600px;
+    width: 300px;
+    left: 50%;
+    top: 50% !important;
+    margin-left: -150px;
+    margin-top: -300px;
+  }
+}
+
+.call-b-header {
+  background: var(--black) !important;
+  color: var(--white) !important;
+  width: 100%;
+  min-height: 5rem;
+  height: 5rem;
+  max-height: 5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  text-transform: uppercase;
+}
+
+.call-b-header #call-b-close-x {
+  box-shadow: none !important;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  width: 40px;
+}
+
+.call-b-input {
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  & #call-b-close {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.call-b-input input[type="text"] {
+  display: block;
+  width: 80%;
+  max-width: 90%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.125em;
+  border: var(--border-size-input) solid var(--white-35) !important;
+  padding: 0 1rem !important;
+  margin: 0 auto 1.5rem auto;
+}
+
+.call-b-input input[type="text"].call-b-inp-err {
+  border: 1px solid rgba(222, 77, 44, 1);
+}
+
+.call-b-input textarea {
+  display: block;
+  width: 80%;
+  padding: 0 1rem !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.125em;
+  height: 5.125em;
+  resize: vertical;
+  font-family: inherit;
+  margin: 0 auto 1.5rem auto;
+  max-height: 10rem;
+  min-height: 10rem;
+}
+
+.call-b-input input[type="submit"] {
+  background: var(--base-color) !important;
+  border: 0 none;
+  color: var(--black) !important;
+  cursor: pointer;
+  font-size: 1rem;
+  min-height: 2.5rem;
+  height: 2.5rem !important;
+  max-height: 2.5rem;
+  margin: 1.5rem auto 2.5rem auto;
+  padding: 0;
+  width: 80% !important;
+  &:hover {
+    background: var(--white) !important;
+    color: var(--black) !important;
+  }
+}
+
+.call-b-error {
+  color: var(--base-color-red);
+  font-size: 18px;
+  font-style: italic;
+  margin: 15px 0 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.call-b-ok {
+  color: var(--white-97) !important;
+  font-size: 1rem;
+  height: auto;
+  line-height: 1.1;
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+.call-b-ok.margins {
+  margin: 60px 0 30px !important;
+}
+
+#call-b-close {
+  border: 0 none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  height: 34px;
+  margin: 40px 0 0;
+  padding: 3px 0;
+  width: 300px;
+}
+
+.call-b-input input[type="text"]::-webkit-input-placeholder {
+  color: var(--white-75)
+}
+
+.call-b-input input[type="text"]::-moz-placeholder {
+  color: var(--white-75)
+}
+
+/* Firefox 19+ */
+.call-b-input input[type="text"]:-moz-placeholder {
+  color: var(--white-75)
+}
+
+/* Firefox 18- */
+.call-b-input input[type="text"]:-ms-input-placeholder {
+  color: var(--white-75)
+}
+
+.call-b-input textarea::-webkit-input-placeholder {
+  color: var(--white-75)
+}
+
+.call-b-input textarea::-moz-placeholder {
+  color: var(--white-75)
+}
+
+/* Firefox 19+ */
+.call-b-input textarea:-moz-placeholder {
+  color: var(--white-75)
+}
+
+/* Firefox 18- */
+.call-b-input textarea:-ms-input-placeholder {
+  color: var(--white-75)
+}
+
+#callb_shop_callb_privacy_text,
+#callb_shop_callb_privacy_link_text {
+  width: 350px;
+}
+
+.callb-privacy-agreed-wrapper {
+  olor: var(--white-75);
+  font-size: 12px;
+  line-height: 14px;
+  margin: 2rem;
+  text-align: left;
+  width: auto;
+}
+
+#call-b-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.66;
+}

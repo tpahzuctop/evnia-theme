@@ -1,0 +1,35 @@
+<div class="content padding__big_vertical">
+    <div id="page" role="main" class="login_registration_fogot-password">
+
+        {if !empty($confirmed_email)}
+        
+            <h1>[s`Thank you!`]</h1>
+            <div class="container login_registration_fogot-password__content">
+                <p>[s`You have successfully confirmed your email.`]</p>
+            </div>
+        {else if !empty($contact)}
+        
+            <h1>[s`Thank you!`]</h1>
+            <div class="container login_registration_fogot-password__content">
+                <p>[s`You have successfully signed up.`]</p>
+    
+            {if !empty($email_confirmation_hash)}
+                <p><em>[s`A confirmation link has been sent to you by email. Please click this link to confirm your signup and to sign in.`]</em></p>
+            {/if}
+            </div>
+        {else}
+        
+            <h1>[s`Sign up`]</h1>
+            <div class="container login_registration_fogot-password__content">
+                {$wa->authAdapters()}
+                {$wa->signupForm($errors)}
+                <script>
+                    (function(){
+                        $('.wa-field-onetime-password .wa-name').text('Сейчас Вам позвонит робот. Введите 4 последние цифры телефона, с которого поступит звонок');
+                    }());
+                </script>
+            </div>
+        {/if}
+        
+    </div>
+</div>

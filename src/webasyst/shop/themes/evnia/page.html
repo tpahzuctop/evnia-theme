@@ -1,0 +1,16 @@
+{if $wa->currentUrl(1,1) == 'https://aoc-gaming.ru/monitor-aoc-gaming-pd27/' || $wa->currentUrl(1,1) == 'https://aoc-gaming.ru/monitor-aoc-q27t1-porsche-design/' || $wa->currentUrl(1,1) == 'https://aoc-gaming.ru/monitor-aoc-u32u1/'}
+    <div>
+    <h1>{$page.name}</h1>
+    <div id="page" role="main">
+        {$page.content}
+    </div>
+    </div>
+{else}
+    <div class="content container">
+    <h1>{$page.name}</h1>
+    <div id="page" role="main">
+        {$page.content}
+    </div>
+    </div>
+{/if}
+

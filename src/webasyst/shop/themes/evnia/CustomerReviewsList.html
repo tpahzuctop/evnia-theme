@@ -1,0 +1,24 @@
+<section class="stream-reviews slider-products">
+
+    <div class="stream-reviews__slider">
+
+        <div class="header">
+            <h2 class="stream-reviews__title">Выбор покупателей</h2>
+            <div class="prev">&lsaquo;</div>
+            <div class="pagination-slider"></div>
+            <div class="next">&rsaquo;</div>
+        </div>
+
+        <div class="swiper-wrapper">
+            {if count($reviews)>0}
+            {foreach $reviews as $review}
+            {include file=$reviews_item_path reply_allowed=false inline review=$review}
+            {/foreach}
+            {else}
+            <p class="s-reviews-list-empty">[`List is empty`]</p>
+            {/if}
+        </div>
+
+    </div>
+
+</section>

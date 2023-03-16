@@ -1,0 +1,17 @@
+<div class="search-page container">
+
+    <h1 class="category-name">
+       Вы искали: {$title}
+    </h1>
+
+    <!-- plugin hook: 'frontend_search' -->
+    {* @event frontend_search.%plugin_id% *}
+    {foreach $frontend_search as $_}{$_}{/foreach}
+
+    {if !$products}
+        [`No products were found.`]
+    {else}
+        {include file='list-thumbs.html'}
+    {/if}
+    
+</div>

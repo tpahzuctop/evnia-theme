@@ -1,0 +1,40 @@
+.price-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  padding-bottom: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  color: var(--base-color-dark-hover);
+  white-space: nowrap;
+
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+  @media (min-width: 1550px) {
+    font-size: 1.45rem;
+  }
+  &.out-of-stock {
+      color: var(--white-98) !important;
+  }
+  & .compare-at-price {
+    text-decoration: line-through;
+    color: var(--base-color-red);
+    font-size: .9rem;
+    margin: 0 0 0 .5rem;
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+    @media (min-width: 1550px) {
+      font-size: 1.1rem;
+      margin: 0 0 0 1rem;
+    }
+  }
+}

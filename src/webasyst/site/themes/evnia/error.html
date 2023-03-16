@@ -1,0 +1,15 @@
+{strip}
+<div class="content container">
+  <div id="page" role="main">
+    <h1>
+        {if $error_code}[`Error`]: {$error_code}{/if}
+        {if $error_message}
+        {$error_message}
+        {else}
+        [`Error`]
+        {/if}
+    </h1>
+      [s`The requested resource is not available.`]
+  </div>
+</div>
+{/strip}

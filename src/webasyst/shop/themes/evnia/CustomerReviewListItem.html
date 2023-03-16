@@ -1,0 +1,74 @@
+{strip}
+<article class="stream-review swiper-slide s-review-item" data-id="{$review.id}" data-parent-id="{$review.parent_id}" itemscope itemtype="http://schema.org/Review">
+
+    <div class="stream-review__descr-wrapper">
+
+        <!--name-->
+        {if ifempty($review.author.is_user) > 0 && $plugin_settings.show_shop_name}
+        <div class="stream-review__name"> {$wa->shop->settings('name')}</div>
+        {/if}
+
+        <!--date-->
+        {if $plugin_settings.show_datetime}
+        <span class="stream-review__date" title="{$review.datetime|wa_datetime}">{$review.datetime|wa_datetime:"humandatetime"}</span>
+        {/if}
+
+
+        <!--rating-->
+        {if !$review.parent_id && !empty($review.rate) && $plugin_settings.show_rating}
+        <div class="stream-review__rating rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+            {$rate = round($review.rate)}
+            {for $i = 1 to 5}
+            {$icon_class = "star"}
+            {if ($rate < $i)}
+            {$icon_class = "star-empty"}
+            {/if}
+            <i class="rating-star star-active" data-rate-count="{$i}">
+                <svg>
+                    <use xlink:href="/wa-apps/site/themes/agonbyaoc/svg/symbols-sprite.svg#agonbyaoc-icon_star"></use>
+                </svg>
+            </i>
+            {/for}
+        </div>
+        {/if}
+
+        <!--description-->
+        {if $review.text && $plugin_settings.show_description}
+        <p class="stream-review__descr">
+            {if $plugin_settings.truncate>0}{$review.text|truncate:$plugin_settings.truncate}{else}{$review.text}{/if}
+        </p>
+        {/if}
+    </div>
+
+    <div class="stream-review__line"></div>
+
+    <div class="stream-review__product stream-review-product">
+
+        <!--img-->
+        {$img_src = $wa->shop->productImgUrl(['id'=> $review.product_id, 'image_id' => $review.product_image_id, 'ext' => $review.product_image_ext, 'image_filename'=>$review.product_image_filename], $plugin_settings.list_product_image_size)}
+        {if $plugin_settings.show_product_image && $img_src}
+
+        <img alt="{$review.product_name|strip_tags|escape}" src="{$img_src}" class="stream-review-product__img">
+        {/if}
+
+        <!--title-link-->
+        {if $plugin_settings.show_product_link || $plugin_settings.show_review_subject}
+
+        <{$plugin_settings.review_header_tag|escape} class="{$plugin_settings.review_header_class|escape} s-review-name" itemprop="name">
+            {if $plugin_settings.show_product_link}
+            <a href="{$review.product_url|escape}" class="stream-review-product__title">{if $plugin_settings.truncate_title>0}{$review.product_name|strip_tags|truncate:$plugin_settings.truncate_title|escape}{else}{$review.product_name|strip_tags|escape}{/if}</a>
+            {/if}
+            {if $review.title && $plugin_settings.show_review_subject}
+                {if $plugin_settings.truncate_title>0}{$review.title|strip_tags|truncate:$plugin_settings.truncate_title|escape}{else}{$review.title|strip_tags|escape}{/if}
+            {/if}
+        </{$plugin_settings.review_header_tag|escape}>
+        {/if}
+    </div>
+
+
+    <a href="#" class="stream-review__btn button button-color">Читать отзывы</a>
+
+
+</article>
+
+{/strip}

@@ -1,0 +1,74 @@
+.tag-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  @media (min-width: 768px) {
+    padding-top: 0;
+  }
+}
+.tag {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-5);
+  background: var(--white-15);
+  color: var(--white);
+  font-style: normal;
+  font-weight: normal;
+  font-size: .85rem;
+  margin: 0.25rem 0.5rem 0.25rem 0;
+  min-height: auto;
+  height: auto;
+  padding: 0.35rem 0.5rem;
+  @media (min-width: 768px) {
+    margin: .5rem 1rem .5rem 0;
+    min-height: 2rem;
+    height: 2rem;
+    padding: 0 .65rem;
+  }
+  &.big-tag {
+    min-height: 2.5rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+  }
+}
+.tag-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: .5rem 1rem .5rem 0;
+  font-style: normal;
+  font-weight: normal;
+  min-height: 2rem;
+  height: 2rem;
+  &.big-tag-link {
+    min-height: 2.5rem;
+    height: 2.5rem;
+    & > a {
+      font-size: 1rem;
+    }
+  }
+  & > a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: var(--white);
+    height: 100%;
+    font-size: .85rem;
+    border-radius: var(--border-radius-5);
+    padding: 0 .65rem;
+    background: var(--white-15);
+    &:hover {
+      background: var(--base-color);
+      background: -moz-linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+      background: -webkit-linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+      background: linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--base-color-dark)", endColorstr=" var(--base-color) ", GradientType=1);
+    }
+  }
+}

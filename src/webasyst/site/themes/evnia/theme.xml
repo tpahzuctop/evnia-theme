@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
+<theme id="evnia" system="0" vendor="labbb_website" author="labbb_website" app="site" version="1.0.6">
+    <name locale="en_US">Evnia Desktop</name>
+    <name locale="ru_RU">Evnia ПК ВЕРСИЯ</name>
+    <description locale="en_US">Theme Evnia</description>
+    <description locale="ru_RU">Тема Evnia</description>
+    <support locale="en_US">support@aoc-gaming.ru</support>
+    <support locale="ru_RU">support@aoc-gaming.ru</support>
+    <instruction locale="en_US">https://aoc-gaming.ru/about/contacts/</instruction>
+    <instruction locale="ru_RU">https://aoc-gaming.ru/about/contacts/</instruction>
+    <files>
+        <file path="head.html" custom="0">
+            <description locale="en_US">Site app's &lt;head&gt; instructions</description>
+            <description locale="ru_RU">Блок &lt;head&gt; приложения «Сайт»</description>
+        </file>
+        <file path="css/style.css" custom="0">
+            <description locale="en_US">Core CSS of the theme</description>
+            <description locale="ru_RU">Основной файл CSS-стилей</description>
+        </file>
+        <file path="js/app.js" custom="0">
+            <description locale="en_US">Core js of the theme</description>
+            <description locale="ru_RU">Основной файл jsй</description>
+        </file>
+    </files>
+    <about locale="en_US">
+        &lt;p&gt;&lt;b&gt;Evnia THEME&lt;/b&gt;&lt;/p&gt;
+    </about>
+    <about locale="ru_RU">
+        &lt;p style="width: 100%; background: #121212; margin: 40px 0"&gt;&lt;b style="display:block;padding: 2rem;
+        color: #bf192a; text-align:center"&gt;Evnia THEME&lt;/b&gt;&lt;/p&gt;
+    </about>
+    <settings>
+        <setting var="scheme" control_type="group_divider">
+            <value>decoration</value>
+            <name locale="ru_RU">
+                Оформление и цветовая схема
+            </name>
+        </setting>
+        <setting var="paragraph_scheme" control_type="paragraph">
+            <value/>
+            <name locale="ru_RU">Загрузите логотип, выберите настройки цветовой гаммы и шрифт интернет-магазина.</name>
+        </setting>
+        <setting var="logo" control_type="image">
+            <value>img/logo.png</value>
+            <filename>img/logo.*</filename>
+            <name locale="ru_RU">Логотип</name>
+            <description locale="ru_RU">
+                Загрузите изображение в формате .PNG или .JPG. Рекомендуемые пропорции и размер логотипа
+                400х100px. Пример шаблона.
+            </description>
+        </setting>
+        <setting var="logo_svg_url">
+            <value>wa-data/public/shop/themes/evnia/img/logo/AGONBYAOC/agonby_aoc_white.svg</value>
+            <name locale="ru_RU">Логотип .SVG</name>
+            <description locale="ru_RU">URL-адрес на логотип в формате .SVG. Если указан адрес будет использоваться
+                данный логотип.
+                Для загрузки логотипа используйте &lt;a href="/webasyst/site/#/files/" target="_blank"&gt;файловый
+                менеджер&lt;/a&gt;
+            </description>
+        </setting>
+        <setting var="category_dummy_image" control_type="text">
+            <value/>
+            <name locale="ru_RU">Заглушка для категорий</name>
+            <description locale="ru_RU">
+                URL-адрес на картинку. Если указан адрес будет использоваться данная картинка. Для загрузки логотипа
+                используйте &lt;a href="/webasyst/site/#/files/" target="_blank"&gt;файловый менеджер&lt;/a&gt;
+
+            </description>
+        </setting>
+        <setting var="product_dummy_image" control_type="text">
+            <value/>
+            <name locale="ru_RU">Заглушка для товаров</name>
+            <description locale="ru_RU">
+                URL-адрес на картинку. Если указан адрес будет использоваться данная картинка. Для загрузки логотипа
+                используйте &lt;a href="/webasyst/site/#/files/" target="_blank"&gt;файловый менеджер&lt;/a&gt;
+
+            </description>
+        </setting>
+        <setting var="contacts" control_type="group_divider">
+            <value>contacts</value>
+            <name locale="ru_RU">
+                Контактные данные компании
+            </name>
+        </setting>
+        <setting var="paragraph_contacts" control_type="paragraph">
+            <value/>
+            <name locale="ru_RU">Укажите контактные данные и график работы компании. Данные будут использоваться для
+                вывода в теме дизайна.
+            </name>
+        </setting>
+        <setting var="phone_1">
+            <value>+7 (495) 115-84-51</value>
+            <name locale="ru_RU">
+                Первый контактный телефон
+            </name>
+            <description locale="ru_RU">
+                Например: +7 (495) 115-84-51
+            </description>
+        </setting>
+        <setting var="phone_1_hint">
+            <value>Звонки Пн-Пт с 9:00 до 18:00</value>
+            <name locale="ru_RU">
+                Подпись к первому телефону
+            </name>
+            <description locale="ru_RU">
+                Используется в некоторых случаях. Оставьте поле пустым если подпись не нужна.
+            </description>
+        </setting>
+        <setting var="phone_2">
+            <value>8 (800) 350-88-45</value>
+            <name locale="ru_RU">
+                Второй контактный телефон
+            </name>
+            <description locale="ru_RU">
+                Например: 8 (800) 350-88-45
+            </description>
+        </setting>
+        <setting var="phone_2_hint">
+            <value>Звонок бесплатный по РФ</value>
+            <name locale="ru_RU">
+                Подпись к второму
+                телефону
+            </name>
+            <description locale="ru_RU">
+                Используется в некоторых случаях. Оставьте поле пустым если подпись не нужна.
+            </description>
+        </setting>
+        <setting var="email">
+            <value>info@aoc-gaming.ru</value>
+            <name locale="ru_RU">
+                E-Mail
+            </name>
+            <description locale="ru_RU">
+                Например: info@aoc-gaming.ru
+            </description>
+        </setting>
+        <setting var="address">
+            <value>г. Москва, ул. Космонавта Волкова, 10</value>
+            <name locale="ru_RU">
+                Адрес
+            </name>
+            <description locale="ru_RU">
+                Например: г. Москва, Космонавта Волкова, 10
+            </description>
+        </setting>
+        <setting var="schedule">
+            <value>Пн-Пт, с 9:00 до 18:00</value>
+            <name locale="ru_RU">
+                График работы
+            </name>
+            <description locale="ru_RU">
+                Например: Пн-Пт, с 9:00-18:00
+            </description>
+        </setting>
+        <setting var="messengers_section" control_type="group_divider">
+            <value>contacts/messengers_section</value>
+            <name locale="ru_RU">
+                Мессенджеры
+            </name>
+        </setting>
+        <setting var="whatsapp">
+            <value/>
+            <name locale="ru_RU">
+                WhatsApp
+            </name>
+            <description locale="ru_RU">
+                Например: +7 (495) 115-84-51. Выводится в варианте шапки №1, а так же в адаптивной версии.
+            </description>
+        </setting>
+        <setting var="viber">
+            <value/>
+            <name locale="ru_RU">
+                Viber
+            </name>
+            <description locale="ru_RU">
+                Например: +7 (495) 115-84-51. Выводится в варианте шапки №1, а так же в адаптивной версии.
+            </description>
+        </setting>
+        <setting var="telegram">
+            <value/>
+            <name locale="ru_RU">
+                Telegram
+            </name>
+            <description locale="ru_RU">
+                Например: aocgaming. Выводится в варианте шапки №1, а так же в адаптивной версии.
+            </description>
+        </setting>
+        <setting var="social_section" control_type="group_divider">
+            <value>contacts/social_section</value>
+            <name locale="ru_RU">
+                Социальные сети
+            </name>
+        </setting>
+        <setting var="vk_link">
+            <value>https://vk.com/gamingsolutions</value>
+            <name locale="ru_RU">
+                VK
+            </name>
+            <description locale="ru_RU">
+                Ссылка на группу или профиль Вконтакте. Например: https://vk.com/gamingsolutions
+            </description>
+        </setting>
+        <setting var="instagram_link">
+            <value/>
+            <name locale="ru_RU">
+                Instagram
+            </name>
+            <description locale="ru_RU">
+                Ссылка на страницу в Instagram. Например: https://www.instagram.com/gamingsolutions_official/
+            </description>
+        </setting>
+        <setting var="facebook_link">
+            <value/>
+            <name locale="ru_RU">
+                Facebook
+            </name>
+            <description locale="ru_RU">
+                Ссылка на группу в Facebook. Например: http://www.facebook.com/gamingsolutions.official/
+            </description>
+        </setting>
+        <setting var="youtube_link">
+            <value>https://www.youtube.com/channel/UCRI6KrKBCWLvTQHc53rUbQQ</value>
+            <name locale="ru_RU">
+                Youtube
+            </name>
+            <description locale="ru_RU">
+                Ссылка на канал Youtube. Например: https://www.instagram.com/aocgaming/
+            </description>
+        </setting>
+        <setting var="tiktok_link">
+            <value>https://www.tiktok.com/@gamingsol?</value>
+            <name locale="ru_RU">
+                Tik Tok
+            </name>
+            <description locale="ru_RU">
+                Ссылка на TikTok. Например: https://www.tiktok.com/@gamingsol?
+            </description>
+        </setting>
+        <setting var="twitter_link">
+            <value/>
+            <name locale="ru_RU">
+                Twitter
+            </name>
+            <description locale="ru_RU">
+                Ссылка на страницу Twitter. Например: https://twitter.com/aocgaming
+            </description>
+        </setting>
+        <setting var="odnoklassniki_link">
+            <value/>
+            <name locale="ru_RU">
+                Одноклассники
+            </name>
+            <description locale="ru_RU">
+                Ссылка на группу в Однокласниках. Например: https://ok.ru/aocgaming
+            </description>
+        </setting>
+        <setting var="yandex_zen_link">
+            <value/>
+            <name locale="ru_RU">
+                Яндекс.Дзен
+            </name>
+            <description locale="ru_RU">
+                Ссылка на канал Яндекс.Дзена. Например: https://zen.yandex.ru/aocgaming
+            </description>
+        </setting>
+        <setting var="telegram_link">
+            <value/>
+            <name locale="ru_RU">
+                Telegram
+            </name>
+            <description locale="ru_RU">
+                Ссылка на Telegram-канал. Например: https://t.me/bodysite
+            </description>
+        </setting>
+        <setting var="social_widgets" control_type="group_divider">
+            <value>contacts/social_widgets</value>
+            <name locale="ru_RU">
+                Виджеты социальных сетей
+            </name>
+        </setting>
+        <setting var="social_widgets_paragraph" control_type="paragraph">
+            <value/>
+            <name locale="ru_RU">
+
+
+            </name>
+        </setting>
+        <setting var="vk_widget">
+            <value/>
+            <name locale="ru_RU">
+                VK виджет
+            </name>
+            <description locale="ru_RU">
+                Получить код виджета: &lt;a href="https://vk.com/dev/Community"&gt;https://vk.com/dev/Community&lt;/a&gt;
+                &lt;strong&gt;Оптимальные настройки, ширина: 253px; высота: 300px; рамка отключена;&lt;/strong&gt;
+
+            </description>
+        </setting>
+        <setting var="instagram_widget">
+            <value/>
+            <name locale="ru_RU">
+                Instagram виджет
+            </name>
+            <description locale="ru_RU">
+                Получить код виджета: &lt;a href="http://instawidget.net"&gt;http://instawidget.net&lt;/a&gt; &lt;strong&gt;Оптимальные
+                настройки, ширина: 253px; высота: 300px; рамка отключена;&lt;/strong&gt;
+
+            </description>
+        </setting>
+        <setting var="facebook_widget">
+            <value/>
+            <name locale="ru_RU">
+                Facebook виджет
+            </name>
+            <description locale="ru_RU">
+                Получить код виджета: &lt;a href="https://developers.facebook.com/docs/plugins/page-plugin"&gt;https://developers.facebook.com/docs/plugins/page-plugin&lt;/a&gt;
+                &lt;strong&gt;Оптимальные настройки, ширина: 253px; высота: 300px; рамка отключена;&lt;/strong&gt;
+
+            </description>
+        </setting>
+        <setting var="twitter_widget">
+            <value/>
+            <name locale="ru_RU">
+                Twitter виджет
+            </name>
+            <description locale="ru_RU">
+                Получить код виджета: &lt;a href="https://twitter.com/settings/widgets"&gt;https://twitter.com/settings/widgets&lt;/a&gt;
+                &lt;strong&gt;Оптимальные настройки, ширина: 253px; высота: 300px; рамка отключена;&lt;/strong&gt;
+
+            </description>
+        </setting>
+        <setting var="odnoklassniki_widget">
+            <value/>
+            <name locale="ru_RU">
+                Одноклассники виджет
+            </name>
+            <description locale="ru_RU">
+                Получить код виджета: &lt;a href="https://apiok.ru/ext/group"&gt;https://apiok.ru/ext/group&lt;/a&gt;
+                &lt;strong&gt;Оптимальные настройки, ширина: 253px; высота: 300px; рамка отключена;&lt;/strong&gt;
+
+            </description>
+        </setting>
+        <setting var="header" control_type="group_divider">
+            <value>header</value>
+            <name locale="ru_RU">Настройки шапки</name>
+        </setting>
+        <setting var="paragraph_benifit" control_type="paragraph">
+            <value/>
+            <name locale="ru_RU">&lt;img src="img/backend/benifits.jpg" style="marging: 40px 20px 10px 20px;"&gt;&lt;p
+                style="display:block;padding:40px 20px;"&gt;Заполните тексты, которые будут выводиться в строке
+                бенифитов в шапке сайта.&lt;/p&gt;
+            </name>
+        </setting>
+        <setting var="header_benifit1" control_type="text">
+            <value>Доставка по всей России</value>
+            <name locale="ru_RU">
+                Бенифит №1
+            </name>
+        </setting>
+        <setting var="header_benifit2" control_type="text">
+            <value>Возможность купить в кредит</value>
+            <name locale="ru_RU">
+                Бенифит №2
+            </name>
+        </setting>
+        <setting var="header_benifit3" control_type="text">
+            <value>Гарантия 3 года на мониторы</value>
+            <name locale="ru_RU">
+                Бенифит №3
+            </name>
+        </setting>
+        <setting var="header_benifit4" control_type="text">
+            <value>Гарантия 2 года на аксессуары</value>
+            <name locale="ru_RU">
+                Бенифит №4
+            </name>
+        </setting>
+        <setting var="footer" control_type="group_divider">
+            <value>footer</value>
+            <name locale="ru_RU">Настройки подвала</name>
+        </setting>
+        <setting var="footer_1col_name" control_type="text">
+            <value>Каталог товаров</value>
+            <name locale="ru_RU">
+                Заголовок колонки №1 подвала
+            </name>
+        </setting>
+        <setting var="footer_1col_menu_id" control_type="text">
+            <value>74</value>
+            <name locale="ru_RU">
+                Колонка №1 - ID меню из приложения "Управление меню"
+            </name>
+        </setting>
+        <setting var="footer_2col_name" control_type="text">
+            <value>Аксессуары</value>
+            <name locale="ru_RU">
+                Заголовок колонки №2 подвала
+            </name>
+        </setting>
+        <setting var="footer_2col_menu_id" control_type="text">
+            <value>101</value>
+            <name locale="ru_RU">
+                Колонка №2 - ID меню из приложения "Управление меню"
+            </name>
+        </setting>
+        <setting var="footer_3col_name" control_type="text">
+            <value>Покупателям</value>
+            <name locale="ru_RU">
+                Заголовок колонки №3 подвала
+            </name>
+        </setting>
+        <setting var="footer_3col_menu_id" control_type="text">
+            <value>82</value>
+            <name locale="ru_RU">
+                Колонка №3 - ID меню из приложения "Управление меню"
+            </name>
+        </setting>
+        <setting var="footer_4col_name" control_type="text">
+            <value>Информация</value>
+            <name locale="ru_RU">
+                Заголовок колонки №4 подвала
+            </name>
+        </setting>
+        <setting var="footer_4col_menu_id" control_type="text">
+            <value>90</value>
+            <name locale="ru_RU">
+                Колонка №4 - ID меню из приложения "Управление меню"
+            </name>
+        </setting>
+        <setting var="footer_5col_name" control_type="text">
+            <value>Контакты</value>
+            <name locale="ru_RU">
+                Заголовок колонки №5 подвала
+            </name>
+        </setting>
+        <setting var="footer_copyright">
+            <value>Интернет магазин ООО "Игровые решения"</value>
+            <name locale="ru_RU">
+                Текст копирайтов в подвале
+            </name>
+        </setting>
+        <setting var="other_section" control_type="group_divider">
+            <value>other_section</value>
+            <name locale="ru_RU">
+                Общие настройки
+            </name>
+        </setting>
+        <setting var="paragraph_other" control_type="paragraph">
+            <value/>
+            <name locale="ru_RU">Общие настройки интернет-магазина.</name>
+        </setting>
+        <setting var="header_menu_number" control_type="text">
+            <value>132</value>
+            <name locale="ru_RU">
+                ID главного меню из приложения "Управление меню"
+            </name>
+        </setting>
+        <setting var="header_topbar_menu_number" control_type="text">
+            <value>108</value>
+            <name locale="ru_RU">
+                ID меню в топбаре шапки сайта из приложения "Управление меню"
+            </name>
+        </setting>
+        <setting var="policy_link">
+            <value>/policy</value>
+            <name locale="ru_RU">Ссылка на политику обработки персональных данных</name>
+            <description locale="ru_RU">
+                Укажите ссылку на страницу с политикой обработки персональных данных
+            </description>
+        </setting>
+        <setting var="cookie_panel" control_type="checkbox">
+            <value/>
+            <name locale="ru_RU">Выводить уведомление "Мы используем cookie"</name>
+        </setting>
+        <setting var="cookie_panel_text">
+            <value locale="en_US">Our website may use cookies: this helps the website to work better. If you continue to
+                use the website, we will think that you are agreed.
+            </value>
+            <value locale="ru_RU">Мы сохраняем файлы cookie: это помогает сайту работать лучше. Если Вы продолжите
+                использовать сайт, мы будем считать, что Вас это устраивает.
+            </value>
+            <name locale="ru_RU">Текст уведомления об использовании Cookie</name>
+        </setting>
+        <setting var="cookie_panel_button_text">
+            <value locale="en_US">OK</value>
+            <value locale="ru_RU">Хорошо</value>
+            <name locale="ru_RU">Текст кнопки согласия с использованием Cookie</name>
+        </setting>
+        <setting var="cookie_panel_button_side" control_type="select">
+            <value>left</value>
+            <name locale="ru_RU">Расположение кнопки согласия с использованием Cookie</name>
+            <options>
+                <option value="right">
+                    <name locale="ru_RU">Справа</name>
+                </option>
+                <option value="left">
+                    <name locale="ru_RU">Слева</name>
+                </option>
+            </options>
+        </setting>
+        <setting var="up_and_contacts_button" control_type="checkbox">
+            <value>1</value>
+            <name locale="ru_RU">Выводить кнопку "Вверх и контакты"</name>
+        </setting>
+        <setting var="up_and_contacts_button_side" control_type="select">
+            <value>left</value>
+            <name locale="ru_RU">Расположение кнопки "Вверх и контакты"</name>
+            <options>
+                <option value="right">
+                    <name locale="ru_RU">Справа</name>
+                </option>
+                <option value="left">
+                    <name locale="ru_RU">Слева</name>
+                </option>
+            </options>
+        </setting>
+        <setting var="theme_version_images_reset" control_type="text">
+            <value>1</value>
+            <name locale="ru_RU">
+                Счетчик для сброса версии картинок
+            </name>
+        </setting>
+    </settings>
+</theme>

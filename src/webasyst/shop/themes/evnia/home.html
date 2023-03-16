@@ -1,0 +1,76 @@
+{$aksessuary = $wa->shop->productSet('aksessuary_aoc')}
+{$bestsellers = $wa->shop->productSet('bestsellers')}
+{$new = $wa->shop->productSet('new')}
+{if $promocards = $wa->shop->promos()}
+<!-- PROMOS -->
+<section class="promos">
+    <div class="slider__promos">
+        <div class="swiper-wrapper products-list-flex">
+            {foreach $promocards as $promo}
+            <article id="s-promo-{$promo.id}"
+                     class="swiper-slide {if $promo.background_color=='agon'} agon{elseif $promo.background_color=='agonpro'} agonpro{else}{if $promo.background_color=='newyear'} newyear{else} aoc-gaming{/if}{/if}">
+                <a href="{$promo.link|escape}">
+                    <div class="promo-content" style="background-image: url('{$promo.image}');">
+                        {if !empty($promo.title)}<h2
+                            class="{if $promo.color=='agon'}agon{elseif $promo.color=='agonpro'}agonpro{else}{if $promo.background_color=='newyear'} newyear{else} aoc-gaming{/if}{/if}">
+                        {$promo.title}</h2>{/if}
+                        {if !empty($promo.body)}
+                        <div class="sub-header{if $promo.color=='agon'} agon{elseif $promo.color=='agonpro'} agonpro{else}{if $promo.background_color=='newyear'} newyear{else} aoc-gaming{/if}{/if}">
+                            {$promo.body}
+                        </div>
+                        {/if}
+                    </div>
+                </a>
+            </article>
+            {/foreach}
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev">
+            <svg class="icon">
+                <use xlink:href="{$wa_parent_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_arrow-left"></use>
+            </svg>
+        </div>
+        <div class="swiper-button-next">
+            <svg class="icon">
+                <use xlink:href="{$wa_parent_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_arrow-right"></use>
+            </svg>
+        </div>
+    </div>
+</section>
+{/if}
+<div class="container">
+    <section class="slider-products">
+        <div class="slider__container">
+            <div class="header">
+                <h2>Насладитесь нашим решением</h2>
+                <div class="prev">&lsaquo;</div>
+                <div class="pagination-slider"></div>
+                <div class="next">&rsaquo;</div>
+            </div>
+            <div class="swiper-wrapper products-list-flex">
+                {if $new}
+                {include file="list-thumbs-slider.html" products=$new inline}
+                {else}
+                <p class="hint align-center"><em>{sprintf('[`Product set with the ID <strong>%s</strong> either does
+                    not exist or does not contain any product. Add some products into a product set with the
+                    specified ID to make these products featured here.`]','new')}</em></p>
+                {/if}
+            </div>
+        </div>
+    </section>
+
+    <!--stream-reviews section-->
+
+    {if $wa->shop}{shopCustomerreviewsPlugin::displayReviewsAtHomePage()}{/if}
+    <!-- plugin hook: 'frontend_homepage' -->
+    {* @event frontend_homepage.%plugin_id% *}
+    {foreach $frontend_homepage as $plugin => $_}
+        {if $plugin !== 'customerreviews-plugin'}
+            {$_}
+        {/if}
+    {/foreach}
+    <!-- plugin hook end: 'frontend_homepage' -->
+</div>

@@ -1,0 +1,88 @@
+@charset 'UTF-8';
+@import 'evnia/variables/root';
+
+/* Подключение шрифтов */
+@import 'evnia/fonts/fonts';
+
+
+/* Общий сброс стилей браузера */
+@import 'evnia/reset/browsers/reset';
+@import 'evnia/reset/browsers/scrollbar';
+@import 'evnia/reset/browsers/placeholder';
+
+
+/* Переменные цвета, градиенты, контейнеры, кнопки */
+@import 'evnia/variables/padding';
+@import 'evnia/variables/margin';
+@import 'evnia/variables/background';
+@import 'evnia/variables/containers';
+@import 'evnia/variables/buttons';
+@import 'evnia/variables/input';
+@import 'evnia/variables/html-body';
+@import 'evnia/variables/h1-h6';
+
+
+/* Блоки хлебные крошки, галереи, отзывы и т.д. */
+@import 'evnia/blocks/main';
+@import 'evnia/blocks/breadcrumb';
+@import 'evnia/blocks/club-call';
+@import 'evnia/blocks/category';
+@import 'evnia/blocks/header';
+@import 'evnia/blocks/footer';
+@import 'evnia/blocks/toast-message';
+@import 'evnia/blocks/email-distribution';
+@import 'evnia/blocks/nav-fixed-mobile';
+
+/* Блоки блога */
+@import 'evnia/blocks/blog/club-gallery';
+@import 'evnia/blocks/blog/club-style';
+@import 'evnia/blocks/blog/stream-posts';
+
+
+/* Блоки магазина */
+@import 'evnia/blocks/shop/category_descriptions';
+@import 'evnia/blocks/shop/compare';
+@import 'evnia/blocks/shop/info-product';
+@import 'evnia/blocks/shop/filters';
+@import 'evnia/blocks/shop/my-profile';
+@import 'evnia/blocks/shop/obzor';
+@import 'evnia/blocks/shop/price';
+@import 'evnia/blocks/shop/product';
+@import 'evnia/blocks/shop/product-list';
+@import 'evnia/blocks/shop/product-list-item';
+@import 'evnia/blocks/shop/product-cart.scss';
+@import 'evnia/blocks/shop/review';
+@import 'evnia/blocks/shop/sliders';
+@import 'evnia/blocks/shop/tag';
+@import 'evnia/blocks/shop/thumb-list';
+@import 'evnia/blocks/shop/stream-reviews';
+
+
+/* Стили плагинов */
+@import 'evnia/reset/plugins/callb';
+@import 'evnia/reset/plugins/cityselect';
+@import 'evnia/reset/plugins/fancybox';
+@import 'evnia/reset/plugins/plugin_arrived';
+@import 'evnia/reset/plugins/quickorder_alpha';
+@import 'evnia/reset/plugins/gallery_fancybox';
+
+
+/* Сброс стилей вебасиста */
+@import 'evnia/reset/webasyst/cart';
+@import 'evnia/reset/webasyst/cart-840-1300';
+@import 'evnia/reset/webasyst/cart-600';
+@import 'evnia/reset/webasyst/form';
+@import 'evnia/reset/webasyst/my_webasyst_style';
+@import 'evnia/reset/webasyst/order';
+@import 'evnia/reset/webasyst/wa-form-change';
+@import 'evnia/reset/webasyst/wa-iu-change';
+
+
+/* popup */
+@import 'evnia/blocks/popup';
+@import 'evnia/blocks/close-button';
+@import 'evnia/blocks/popup__contacts';
+
+
+
+@import 'evnia/blocks/shop/change-site';

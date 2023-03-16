@@ -1,0 +1,173 @@
+{strip}
+{$store_cart_list = $wa->shop->cart->items()}
+{$_cart_url = $wa->getUrl('shop/frontend/cart')}
+{if method_exists($wa->shop, 'checkout')}
+{$_cart_url = $wa->shop->checkout()->cartUrl()}
+{/if}
+{$add2cart_label = _wd('shop', 'Add to cart')}
+{$features_list = $wa->shop->features($products)}
+
+{assign "find" array('id="one-click--button"', 'type="text/javascript"')}
+{assign "repl" array('','')}
+
+{foreach $products as $p}
+<article class="swiper-slide products-list-item">
+    {$_product = $wa->shop->product($p.id)}
+    {$badge_html = $wa->shop->badgeHtml($p.badge)}
+
+    {if is_array($p)}
+    {$pid = $wa->shop->product($p.id)}
+    {/if}
+
+    {$features = $pid->getFeatures('all')}
+
+    {if $badge_html}
+    <span class="corner top right">{$badge_html}</span>
+    {/if}
+    <div class="products-list-item_image-wrap">
+        <a href="{$p.frontend_url}" title="{$p.name|escape}{if $p.summary} &mdash; {strip_tags($p.summary)|escape}{/if}">
+            <img data-srcset="{$wa->shop->productImgUrl($p, '200x0')}?v={$wa_theme_version}{$theme_settings.theme_version_reset} 1x, {$wa->shop->productImgUrl($p, '430')}?v={$wa_theme_version}{$theme_settings.theme_version_reset} 1.5x, {$wa->shop->productImgUrl($p, '750')}?v={$wa_theme_version}{$theme_settings.theme_version_reset} 2x, {$wa->shop->productImgUrl($p, '970')}?v={$theme_settings.theme_version_images_reset} 3x"  srcset="{$wa_active_theme_url}img/dummy200.png 1x"  src="{$wa->shop->productImgUrl($p, '1200')}?v={$theme_settings.theme_version_images_reset}" itemprop="image" alt="{$p.name|escape} в официальном интернет магазине AGONBYAOC.ru (AOC Россия)" title="{$p.name|escape} в официальном интернет магазине AGONBYAOC.ru (AOC Россия)"  class="lazyload" loading="lazy" decoding="async">
+        </a>
+    </div>
+    <div class="price-wrap">
+        {if $p.price > 0 && $p.status > 0 && $p.count > 0 && $p.count !== NULL }
+            {if $p.min_price < $p.price}От {shop_currency_html($p.min_price)}{else}{shop_currency_html($p.price)}{/if}
+            {if $p.compare_price > $p.price} <span class="compare-at-price nowrap"> {shop_currency_html($p.compare_price)}</span> {/if}
+        {/if}
+    </div>
+    <h2 itemprop="name">
+        <a itemprop="url" href="{$p.frontend_url}" title="{$p.name|escape}{if $p.summary} &mdash; {strip_tags($p.summary)|escape}{/if}">{$p.name|escape}</a>
+    </h2>
+    <div class="tag-list no-margin">
+        {foreach $_product.features as $f_code => $f_value}
+
+        {if $f_code=="razmer_ekrana_dyuymy" || $f_code=="tip_ekrana" || $f_code=="kreplenie_vesa" ||
+        $f_code=="shirina_stola" || $f_code=="dlina_stola" || $f_code=="vysota_stola" ||
+        $f_code=="chastota_oprosa_usb_porta" || $f_code=="pereklyuchateli" || $f_code=="audiokanaly" ||
+        $f_code=="konnektor" || $f_code=="tip_matritsy" || $f_code=="razreshenie" || $f_code=="chastota_smeny_kadrov" ||
+        $f_code=="vremya_otklika" || $f_code=="kolichestvo_monitorov" || $f_code=="nagruzka_kg" ||
+        $f_code=="maksimalnaya_nagruzka" || $f_code=="podsvetka" }
+        <div>
+            {if is_array($f_value)}
+            {if $features_list[$f_code].type == 'color'}
+            {implode('<br> ', $f_value)}
+            {else}
+            <div class="tag">
+                {implode('
+            </div>
+            <div class="tag">', $f_value)}
+            </div>
+            {/if}
+            {else}
+            <div class="tag">
+                {if $f_value == 'Виртуальный объемный звук 7.1 (только для ПК)'}
+                Виртуальный 7.1
+                {else}
+                {if $f_code=="nagruzka_kg" || $f_code=="maksimalnaya_nagruzka"}
+                До {$f_value|replace:"кг":""} кг
+                {else}
+                {$f_value}
+                {/if}
+                {/if}
+            </div>
+            {/if}
+        </div>
+        {/if}
+
+        {/foreach}
+    </div>
+    <div class="buttons">
+        {if ($wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0) && $p.price > 0 && $p.price
+        != 999999}
+        <form class="purchase addtocart" {if $p.sku_count> 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url,
+            '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('shop/frontendCart/add')}">
+            <input type="hidden" name="product_id" value="{$p.id}">
+            {$in_store_cart = 'false'}
+            {foreach $store_cart_list as $cart_item}
+            {if $p.id == $cart_item.product_id}
+            <a href="{$_cart_url}" title="Оформить заказ" class="order-done"> Оформить заказ </a>
+            {$in_store_cart = 'true'}
+            {/if}
+            {/foreach}
+            {if $in_store_cart != 'true'}
+            <input type="submit" value="{$add2cart_label}" onclick="toogleClass('product-btn-{$p.id}','product-btn-{$p.id}','product-btn-{$p.id} active');return true;" class="button button-color">
+            {/if}
+
+            {shopStorequickorderPlugin::product_button()|replace:$find:$repl}
+        </form>
+        {else}
+        {shopArrivedPlugin::getFormHtml($p)}
+        <input type="submit" value="{$add2cart_label}" onclick="" disabled class="hidden">
+        {/if}
+        <div class="compare">
+            <button data-product="{$p.id}" class="clear-button  unhidden compare-button-{$p.id}" onclick="toogleClass('.compare-button-' + {$p.id}, 'unhidden', 'hidden');toogleClass('.uncompare-button-' + {$p.id}, 'hidden', 'unhidden');addCompare('{$p.id}','{$p.name|escape}');return true;">
+                [`Add to comparison table`]
+            </button>
+            <button data-product="{$p.id}" class="clear-button hidden uncompare-button-{$p.id}" onclick="toogleClass('.uncompare-button-' + {$p.id}, 'unhidden', 'hidden');toogleClass('.compare-button-' + {$p.id}, 'hidden', 'unhidden');removeCompare('{$p.id}','{$p.name|escape}');return true;">
+                [`Remove from comparison table`]
+            </button>
+        </div>
+    </div>
+</article>
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "{$_product.name|escape}",
+        "image": [
+            {
+                foreach
+                $_product.images
+                as
+                $image
+            }
+            "https://aoc-gaming.ru{$wa->shop->imgUrl($image, '1200')}"
+            {
+                if
+                $image@last
+            }
+            {
+                else
+            },
+            {
+                /if
+            }
+            {
+                /foreach
+            }
+        ],
+        "description": "{$_product.summary|escape}",
+        "brand": {
+            "@type": "Brand",
+            "name": "{if $_product.features.brend}{$_product.features.brend|escape}{/if}"
+        },
+        "sku": "{if $_product.skus[$p.sku_id].sku}{$_product.skus[$p.sku_id].sku|escape}{else}{if $_product.skus[$p.sku_id].name}{$_product.skus[$p.sku_id].name|escape}{/if}{/if}",
+        "gtin13": "{if $features.gtin}{$features.gtin|escape}{else}{$features.ean|escape}{/if}",
+        "offers": {
+            "@type": "Offer",
+            "url": "{$p.frontend_url}",
+            "priceCurrency": "RUB",
+            "price": "{$p.price|escape}",
+            "priceValidUntil": "{$smarty.now|date_format:'%Y'}-{$smarty.now|date_format:'%m'}-{$smarty.now|date_format:'%d'}",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "seller": {
+                "@type": "Organization",
+                "name": "Официальный интернет магазин мониторов AOC (AGON BY AOC) в России"
+            }
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            {if $p.rating_count!=0}
+                "ratingValue": "{$p.rating|string_format:'%d'}",
+            {else}
+                "ratingValue": "1",
+            {/if}
+            "bestRating": "5",
+            "worstRating": "1",
+            {if $p.rating_count!=0}"ratingCount": "{$p.rating_count|string_format:'%d'}"{else}"ratingCount": "1"{/if}
+        }
+    }
+</script>
+{/foreach}
+{/strip}

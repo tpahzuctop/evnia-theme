@@ -1,0 +1,26 @@
+{strip}
+
+{if !empty($frontend_my_nav)}
+{* @event frontend_my_nav.%plugin_id% *}
+{foreach $frontend_my_nav as $_plugin => $_}
+<li class="{if waRequest::param('plugin') == str_replace('-plugin', '', $_plugin)}is-selected{/if}">{$_}</li>
+{/foreach}
+{/if}
+
+{/strip}
+
+<li class="shop {if $my_nav_selected == 'orders'}selected{/if}">
+    <a href="{$wa->getUrl('/frontend/myOrders')}">[`My orders`]</a>
+</li>
+
+{if $my_app == $wa->app()}
+<li class="shop {if $my_nav_selected == 'profile'}selected{/if}">
+    <a href="{$wa->getUrl('/frontend/myProfile')}">[`My profile`]</a>
+</li>
+{/if}
+
+<!-- plugin hook: 'frontend_my_nav' -->
+{* @event frontend_my_nav.%plugin_id% *}
+{foreach $frontend_my_nav as $_plugin => $_}
+<li class="shop {if waRequest::param('plugin') == str_replace('-plugin', '', $_plugin)}selected{/if}">{$_}</li>
+{/foreach}

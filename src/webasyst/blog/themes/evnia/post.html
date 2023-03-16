@@ -1,0 +1,43 @@
+{* dedicated post page *}
+
+<div itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post" role="main" id="post-{$post.id}">
+        <h1 itemprop="name">
+            {$post.title}
+
+            {* @event prepare_posts_frontend.%plugin_id%.post_title *}
+            {if !empty($post.plugins.post_title)}
+                {foreach $post.plugins.post_title as $plugin => $output}{$output}{/foreach}
+            {/if}
+        </h1>
+
+        {* @event prepare_posts_frontend.%plugin_id%.before *}
+        {if !empty($post.plugins.before)}
+            <div class="text_before">
+                {foreach $post.plugins.before as $plugin => $output}{$output}{/foreach}
+            </div>
+        {/if}
+
+        <div class="text" itemprop="articleBody">
+            {$post.text}
+        </div>
+
+        {if $post.album_id && $post.album.id && $post.album.photos}
+            {include 'post.album.html' album=$post.album inline}
+        {/if}
+
+        {* @event prepare_posts_frontend.%plugin_id%.after *}
+        {if !empty($post.plugins.after)}
+            <div class="text_after">
+                {foreach $post.plugins.after as $plugin => $output}{$output}{/foreach}
+            </div>
+        {/if}
+        
+    </div>
+
+    {* @event frontend_post.%plugin_id%.footer *}
+    {foreach $frontend_post as $plugin => $output}
+        {if !empty($output.footer)}{$output.footer}{/if}
+    {/foreach}
+</div>

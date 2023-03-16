@@ -1,0 +1,143 @@
+<footer class="margin__big_top big__padding_bottom">
+    <hr class="color no-margin">
+    <div class="container padding__big_vertical">
+        <div class="top">
+            <div class="logo">
+                <a href="/" target="_self">
+                    <img src="{$wa_theme_url}img/logo.png?v={$theme_settings.theme_version_images_reset}" alt="Официальный интернет магазин AOC в России" title="Официальный интернет магазин AOC И AGON BY AOC в России" class="margin__auto">
+                </a>
+            </div>
+            <div class="buttons">
+                <a class="button button-grey" href="https://aoc-gaming.ru/showroom/">Шоу-рум</a>
+                <a class="button button-grey" href="https://aoc-gaming.ru/samovyvoz/">Самовывоз</a>
+                <a class="button button-grey maps"
+                   href="https://maps.yandex.ru/?text=%D0%B3.%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9A%D0%BE%D1%81%D0%BC%D0%BE%D0%BD%D0%B0%D0%B2%D1%82%D0%B0%20%D0%92%D0%BE%D0%BB%D0%BA%D0%BE%D0%B2%D0%B0%2C%2010"
+                   target="_blank">
+                    <svg class="icon">
+                        <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_yandex-map"></use>
+                    </svg>
+                    Маршрут до магазина
+                </a>
+            </div>
+        </div>
+        <hr class="no-margin">
+        <div class="middle padding__small_vertical">
+            {if !empty($theme_settings.footer_1col_menu_id)}
+            <div class="block">
+                <h3>{$theme_settings.footer_1col_name}</h3>
+                {$menu_id = $wa->menu->get($theme_settings.footer_1col_menu_id)}
+                {foreach $menu_id as $item}
+                <a href="{$item.url}">{$item.name}</a>
+                {/foreach}
+            </div>
+            {/if}
+            {if !empty($theme_settings.footer_2col_menu_id)}
+            <div class="block">
+                <h3>{$theme_settings.footer_2col_name}</h3>
+                {$menu_id = $wa->menu->get($theme_settings.footer_2col_menu_id)}
+                {foreach $menu_id as $item}
+                <a href="{$item.url}">{$item.name}</a>
+                {/foreach}
+            </div>
+            {/if}
+            {if !empty($theme_settings.footer_3col_menu_id)}
+            <div class="block">
+                <h3>{$theme_settings.footer_3col_name}</h3>
+                {$menu_id = $wa->menu->get($theme_settings.footer_3col_menu_id)}
+                {foreach $menu_id as $item}
+                <a href="{$item.url}">{$item.name}</a>
+                {/foreach}
+            </div>
+            {/if}
+            {if !empty($theme_settings.footer_4col_menu_id)}
+            <div class="block">
+                <h3>{$theme_settings.footer_4col_name}</h3>
+                {$menu_id = $wa->menu->get($theme_settings.footer_4col_menu_id)}
+                {foreach $menu_id as $item}
+                <a href="{$item.url}">{$item.name}</a>
+                {/foreach}
+            </div>
+            {/if}
+            <div class="block contacts">
+                <h3>{$theme_settings.footer_5col_name}</h3>
+                {if $theme_settings.phone_2}
+                <a href="tel:{$theme_settings.phone_2|regex_replace:"/[^0-9\\+]/":''}" class="phone-2">
+                {$theme_settings.phone_2|escape}
+                </a>
+                {/if}
+                {if $theme_settings.phone_1}
+                <a href="tel:{$theme_settings.phone_1|regex_replace:"/[^0-9\\+]/":''}" class="phone-1">
+                {$theme_settings.phone_1|escape}
+                </a>
+                {/if}
+                {if $theme_settings.email}
+                <a href="mailto:{$theme_settings.email}" class="email">
+                    {$theme_settings.email|escape}
+                </a>
+                {/if}
+                {if $theme_settings.vk_link || $theme_settings.instagram_link || $theme_settings.facebook_link ||
+                $theme_settings.youtube_link || $theme_settings.tiktok_link}
+                <ul>
+                    {if $theme_settings.vk_link}
+                    <li>
+                        <a href="{$theme_settings.vk_link}">
+                            <svg class="icon">
+                                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_vk"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    {/if}
+                    {if $theme_settings.instagram_link}
+                    <li>
+                        <a href="{$theme_settings.instagram_link}">
+                            <svg class="icon">
+                                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_instagram"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    {/if}
+                    {if $theme_settings.facebook_link}
+                    <li>
+                        <a href="{$theme_settings.facebook_link}">
+                            <svg class="icon">
+                                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    {/if}
+                    {if $theme_settings.youtube_link}
+                    <li>
+                        <a href="{$theme_settings.youtube_link}">
+                            <svg class="icon">
+                                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_youtube"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    {/if}
+                    {if $theme_settings.tiktok_link}
+                    <li>
+                        <a href="{$theme_settings.tiktok_link}">
+                            <svg class="icon">
+                                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_tiktok"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    {/if}
+                </ul>
+                {/if}
+                {if $theme_settings.address }<span class="hint">{$theme_settings.address}</span>{/if}<br>
+                {if $theme_settings.schedule} <span class="hint">{$theme_settings.schedule}</span>{/if}
+            </div>
+        </div>
+        <hr class="no-margin">
+        <div class="copyright">
+            <div class="links">
+                {if !empty($theme_settings.policy_link)}
+                <a href="https://aoc-gaming.ru{$theme_settings.policy_link}">Политика персональных данных</a>
+                {/if}
+                <a href="{shopHtmlmapViewHelper::getUrl()}">Карта сайта</a>
+            </div>
+            <span class="small">2018 - {time()|wa_datetime:"Y"} &copy; {if !empty($theme_settings.footer_copyright)}{$theme_settings.footer_copyright}{/if}</span>
+        </div>
+    </div>
+</footer>

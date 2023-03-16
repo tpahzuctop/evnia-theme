@@ -1,0 +1,147 @@
+.products-list > .products-list-item {
+  margin: 0 0 2.5rem 0;
+  @media (min-width: 768px) {
+    margin: 0 1rem 6rem 1rem;
+  }
+}
+
+.products-list-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
+  & > .corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    & .badge {
+      margin: 10px;
+      border-radius: 5px;
+      padding: 5px 10px;
+      &.low-price {
+        background: var(--base-color-red);
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(247,87,0,1) 0%, rgba(249,0,0,1) 90.1% );
+      }
+      &.bestseller {
+        background: rgba(19,170,82,1);
+        background-image: radial-gradient( circle farthest-corner at -1% 57.5%,  rgba(19,170,82,1) 0%, rgba(0,102,43,1) 90% );
+      }
+      &.new {
+        background: rgba(0,7,128,1);
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(37,145,251,0.98) 0.1%, rgba(0,7,128,1) 99.8% );
+      }
+    }
+  }
+  & .products-list-item_image-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--white-05);
+    border-radius: var(--border-radius-5);
+    padding: 2rem;
+    text-align: center;
+    height: 250px;
+    margin: 0;
+    @media (min-width: 1550px) {
+      height: 300px;
+    }
+    & a {
+      & img {
+        display: inline-block;
+        width: 100%;
+        max-width: 200px;
+        max-height: 200px;
+        outline: none;
+        border: none;
+      }
+    }
+  }
+  & h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-weight: 500;
+    line-height: 1.6rem;
+    letter-spacing: 1px;
+    margin: 0;
+    height: 6rem;
+    max-height: 6rem;
+    padding: 1rem 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+      align-items: center;
+    }
+    @media (min-width: 1550px) {
+      font-size: 1.3rem;
+      line-height: 1.8rem;
+      height: 8rem;
+      max-height: 8rem;
+    }
+    & a {
+      color: var(--white);
+      &:hover {
+        color: var(--base-color-dark-hover);
+      }
+    }
+  }
+  & .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    margin-top: auto;
+    & .storequickorder-button {
+      width: 100%;
+      border: var(--border-size-input) solid var(--white-15);
+      background-origin: border-box;
+    }
+    & .addtocart {
+      width: 100%;
+      margin: 0 auto;
+      input[type="submit"] {
+        width: 100%;
+      }
+      & a.order-done {
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: var(--white);
+        background: var(--base-color-dark-hover);
+        cursor: pointer;
+        border-radius: var(--border-radius-5);
+        position: relative;
+        outline: none;
+        width: 100%;
+        min-height: 2.6667rem;
+        height: 2.6667rem;
+        padding: 0 1rem;
+        margin: 0.65rem 0;
+        &:hover {
+          color: var(--black) !important;
+          background: -moz-linear-gradient(90deg, rgba(184,145,226,1) 0%, rgba(85,155,210,1) 40%, rgba(85,155,210,1) 60%, rgba(92,210,182,1) 100%);
+          background: -webkit-linear-gradient(90deg, rgba(184,145,226,1) 0%, rgba(85,155,210,1) 40%, rgba(85,155,210,1) 60%, rgba(92,210,182,1) 100%);
+          background: linear-gradient(90deg, rgba(184,145,226,1) 0%, rgba(85,155,210,1) 40%, rgba(85,155,210,1) 60%, rgba(92,210,182,1) 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b891e2",endColorstr="#5cd2b6",GradientType=1);
+      }
+      }
+    }
+    & .compare {
+      text-align: center;
+      margin: 0;
+      & a {
+        color: var(--white-90);
+        &:hover {
+          color: var(--white);
+        }
+      }
+    }
+  }
+}
+.products-list-item.swiper-slide {
+  height: auto;
+}

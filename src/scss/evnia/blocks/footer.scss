@@ -1,0 +1,257 @@
+footer {
+  background: var(--white-10);
+  & .top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-60);
+    font-size: 0.75rem;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    @media (min-width: 768px) {
+      height: 6.25rem;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+    @media (min-width: 1550px) {
+      font-size: 0.875rem;
+    }
+    & .logo, & .logo img {
+      height: 10rem;
+      flex: 0 0 auto;
+      @media (min-width: 768px) {
+        height: 6.25rem;
+      }
+    }
+    & .buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex: 1 1 auto;
+      align-content: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        font-size:1rem;
+      }
+      & a {
+        min-height: 3.5rem;
+        height: 3.5rem;
+        margin: .5rem 0;
+        &:last-child {
+          margin:0.5rem 0 3.5rem 0;
+        }
+        @media (min-width: 768px) {
+          margin: 0 .5rem;
+          min-height:3rem;
+          height:3rem;
+          &:last-child {
+            margin: 0 0 0 .5rem;
+          }
+        }
+      }
+    }
+  }
+  & .middle {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+     & .block {
+       flex: 1 1 auto;
+       max-width: 15rem;
+       @media (min-width: 768px) {
+         max-width:20rem;
+       }
+       & h3 {
+         font-style: normal;
+         font-weight: 500;
+         font-size: 1.5rem;
+         line-height: 3.125rem;
+         margin: 0;
+         padding: 0;
+         @media (min-width: 768px) {
+           font-size: 1rem;
+         }
+         @media (min-width: 1250px) {
+           font-size: 1.125rem;
+         }
+         @media (min-width: 1550px) {
+           font-size: 1.35rem;
+         }
+         @media (min-width: 1850px) {
+           font-size: 1.5rem;
+           line-height: 3.65rem;
+         }
+         @media (min-width: 2150px) {
+           font-size: 1.65rem;
+           line-height: 3.85rem;
+         }
+         &::before {
+           display: none;
+         }
+       }
+       &:last-child {
+          & h3 {
+            text-align: center;
+          }
+       }
+       & a {
+         display: block;
+         color: var(--white-75);
+         font-weight: 400;
+         font-size: 1rem;
+         line-height: 1.875rem;
+         @media (min-width: 768px) {
+           font-size: .75rem;
+         }
+         @media (min-width: 1250px) {
+           font-size: .85rem;
+         }
+         @media (min-width: 1550px) {
+           font-size: .9rem;
+         }
+         @media (min-width: 1850px) {
+           font-size: 1rem;
+         }
+         @media (min-width: 2150px) {
+           font-size: 1.1rem;
+           line-height: 1.91rem;
+         }
+         &.phone-1, &.phone-2 {
+           font-weight: 500;
+           font-size: 1.45rem;
+           line-height: 1rem;
+           color: var(--white);
+           text-align: center;
+           @media (min-width: 1250px) {
+             font-size: 1.65rem;
+           }
+           @media (min-width: 1850px) {
+             font-size: 1.95rem;
+             line-height: 2.5rem;
+           }
+           &:hover {
+             color:var(--base-color-dark-hover);
+           }
+         }
+         &.phone-1 {
+           height: 1.875rem;
+           @media (min-width: 1850px) {
+             height: 3.15rem;
+           }
+         }
+         &.phone-2 {
+           height: 3rem;
+           line-height: 2.5rem;
+           @media (min-width: 1850px) {
+             line-height: 3.5rem;
+           }
+         }
+         &:hover {
+           color: var(--white);
+         }
+         &.email {
+           font-size:.75rem;
+           line-height:1.25rem;
+           text-align: center;
+           text-transform: lowercase;
+           @media (min-width: 1850px) {
+             font-size: 1rem;
+           }
+         }
+       }
+       &.contacts {
+         text-align: center;
+         & ul {
+           display: flex;
+           flex-direction: row;
+           justify-content: center;
+           align-items: center;
+           list-style: none;
+           margin: 0;
+           padding: 1.5rem 0;
+           & li {
+             margin-right: .5rem;
+             &:last-child {
+               margin-right: 0;
+             }
+             & a {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               background: var(--white);
+               color: var(--black);
+               border-radius: 100%;
+               width: 2.5rem;
+               height: 2.5rem;
+               @media (min-width: 1850px) {
+                 width: 3.5rem;
+                 height: 3.5rem;
+               }
+               &:hover {
+                 background: var(--base-color-dark-hover);
+                 color: var(--white);
+               }
+             }
+             & svg {
+               width: 1.5rem;
+               height: 1.5rem;
+               @media (min-width: 1850px) {
+                 width: 1.75rem;
+                 height: 1.75rem;
+               }
+               filter: sepia(0) saturate(2);
+             }
+           }
+         }
+         & .hint {
+           @media (min-width: 1850px) {
+             font-size: 1rem;
+           }
+         }
+       }
+     }
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    @media (max-width: 1049px) {
+      flex-wrap: wrap;
+      row-gap: 1.5rem;
+      column-gap: 1rem;
+    }
+  }
+
+  & .copyright {
+    color:var(--white-60);
+    margin-bottom: 2.5rem;
+    & .links {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 2.5rem 0 1rem 0;
+      color: var(--white-40);
+      font-size: 0.7rem;
+      & a, &:visited, & a:visited {
+        color:var(--white-40);
+        margin-right: 2rem;
+      }
+      & a:hover {
+        color:var(--white);
+      }
+    }
+    & .small {
+      color:var(--white-60);
+    }
+  }
+}

@@ -1,0 +1,250 @@
+{strip}
+{$_hide_cart = $wa->globals("hideCart")}
+
+{$compare_products_count = count($wa->shop->inComparison())}
+{$compare_cookie = waRequest::cookie('shop_compare')}
+{assign var="compare_cookie" value=","|explode:$compare_cookie}
+<div class="change-site">
+    <div class="container">
+        <a href="https://aoc-gaming.ru/" title="Просмотреть продукты для игр AGON BY AOC">
+            <img src="{$wa_theme_url}img/AGONBYAOC-BLACK.png?v={$theme_settings.theme_version_images_reset}" alt="Официальный интернет магазин AOC в России" title="Официальный интернет магазин AOC И AGON BY AOC в России">
+            Просмотреть продукты для игр
+        </a>
+    </div>
+</div>
+<header>
+    <div class="topbar container">
+        <div class="logo">
+            <a href="/evnia-philips/" target="_self">
+                    {if $theme_settings.logo}
+                    <img src="{$wa_theme_url}img/logo.png?v={$theme_settings.theme_version_images_reset}" alt="Официальный интернет магазин EVNIA в России" title="Официальный интернет магазин EVNIA в России">
+                    {else}
+                    <img src="{$wa_theme_url}img/logo.png?v={$theme_settings.theme_version_images_reset}" alt="Официальный интернет магазин EVNIA в России" title="Официальный интернет магазин EVNIA в России">
+                    {/if}
+                </a>
+        </div>
+        <div class="topbar-menu">
+            <div class="city">
+                <!-- plugin hook: '$frontend_header' -->
+                {* @event $frontend_header.%plugin_id% *}
+                {foreach $frontend_header as $_}{$_}{/foreach}
+            </div>
+            <ul>
+                {if $theme_settings.header_topbar_menu_number}
+                {$mainMenu_id = $wa->menu->get($theme_settings.header_topbar_menu_number)}
+                {else}
+                {$mainMenu_id = $wa->apps()}
+                {/if}
+                {foreach $mainMenu_id as $item}
+                <li {if $item@last} class="color-text" {/if}><a href="{$item.url}">{$item.name}</a></li>
+                {/foreach}
+            </ul>
+            <a href="#" id="mobile-topbar-menu" onclick="toogleClass('#slide-menu-left','hidden','unhidden');onClickClose('slide-menu-left','');return true;">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_burger"></use>
+                </svg>
+                <p>Меню</p>
+            </a>
+        </div>
+        <div class="profile">
+
+
+            {if $theme_settings.phone_1}
+
+                <span class="schedule">
+                        <a href="tel:{$theme_settings.phone_1|regex_replace:'/[^0-9\\+]/':''}" class="phone-2">
+                        {$theme_settings.phone_1|escape}
+                        </a>
+                    {if $theme_settings.schedule}
+                        <span class="hint">{$theme_settings.schedule}</span>
+                    {/if}
+                </span>
+
+
+                {if $theme_settings.phone_2}
+                <span class="call-back">
+                    <a href="tel:{$theme_settings.phone_2|regex_replace:'/[^0-9\\+]/':''}" class="phone-1">
+                        {$theme_settings.phone_2|escape}
+                    </a>
+                    <b id="call-back-button" >Обратный звонок</b>
+                </span>
+                {/if}
+
+            {/if}
+
+
+
+            {if $theme_settings.phone_1}
+            <a href="#" class="icon-phone-link" onclick="toogleClass('#contacts-popup','hidden','unhidden')">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_call2"></use>
+                </svg>
+                <p>Контакты</p>
+            </a>
+            {/if}
+
+            <a href="/evnia-philips/compare/" class="compare-link" title="Сравнение товаров">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_compare"></use>
+                </svg>
+                    {if $compare_products_count>0 && !empty($compare_cookie[0])}
+                    <span class="red-dot-counter unhidden" id="compare-counter">{$compare_products_count}</span>
+                    {else}
+                    <span class="red-dot-counter hidden" id="compare-counter">0</span>
+                    {/if}
+                <p>Сравнение</p>
+            </a>
+            {if $wa->isAuthEnabled()}
+                <!-- auth links -->
+                {if $wa->user()->isAuth()}
+                <div class="profile-block">
+                <a href="{$wa->getUrl('shop/frontend/my')}" class="profile-link" title="Профиль пользователя">
+                    <svg class="icon">
+                        <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_account"></use>
+                    </svg>
+                    <p>Аккаунт</p>
+                </a>
+                    <div class="profile-dropdown-menu">
+                      <a href="{$wa->getUrl('/frontend/myProfile')}">Профиль</a>
+                      <a href="{$wa->getUrl('/frontend/myOrders')}">Заказы</a>
+                        <a href="?logout">[`Logout`]</a>
+                    </div>
+                </div>
+                {else}
+                <a href="{$wa->loginUrl()|escape}" class="shopping-cart" title="Регистрация / Вход">
+                    <svg class="icon">
+                        <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_account"></use>
+                    </svg>
+                    <p>Войти</p>
+                </a>
+            {/if}
+
+            {/if}
+
+            {$_cart_url = $wa->getUrl('shop/frontend/cart')}
+            {if method_exists($wa->shop, 'checkout')}
+            {$_cart_url = $wa->shop->checkout()->cartUrl()}
+            {/if}
+                <a href="{$_cart_url}" class="shopping-cart" title="Корзина">
+                    <svg class="icon">
+                        <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_cart"></use>
+                    </svg>
+                    {if $wa->shop->cart->items()}<span class="red-dot-counter">{$wa->shop->cart->count()}</span>{/if}
+                    <p>Корзина</p>
+                </a>
+        </div>
+    </div>
+    {*
+    <div class="benefits">
+        <div class="container swiper-benefits">
+            <div class="swiper-wrapper">
+                {if $theme_settings.header_benifit1}
+                <div class="swiper-slide">
+                    {$theme_settings.header_benifit1}
+                </div>
+                {/if}
+                {if $theme_settings.header_benifit2}
+                <div class="swiper-slide">
+                    {$theme_settings.header_benifit2}
+                </div>
+                {/if}
+                {if $theme_settings.header_benifit3}
+                <div class="swiper-slide">
+                    {$theme_settings.header_benifit3}
+                </div>
+                {/if}
+                {if $theme_settings.header_benifit4}
+                <div class="swiper-slide">
+                    {$theme_settings.header_benifit4}
+                </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+    *}
+</header>
+<div class="header-fixed">
+    <div class="header-fixed__wrap container">
+    <div class="logo">
+        <a href="/" target="_self">
+            {if $theme_settings.logo}
+            <img src="{$wa_theme_url}img/logo.png?v={$theme_settings.theme_version_images_reset}" alt="Официальный интернет магазин EVNIA в России" title="Официальный интернет магазин EVNIA в России">
+            {else}
+            <img src="{$wa_theme_url}img/logo.png?v={$theme_settings.theme_version_images_reset}" alt="Официальный интернет магазин EVNIA в России" title="Официальный интернет магазин EVNIA в России">
+            {/if}
+        </a>
+    </div>
+    <div class="search-form margin__smallest_vertical margin__medium_horizontal">
+        <form method="get" action="{$wa->getUrl('shop/frontend/search')}">
+        {$_query = $smarty.get.query|default:''|escape}
+            <input type="text" name="query" value="{if !empty($_query)}{$_query}{/if}" placeholder="[`Search`]" id="header-fixed-search-form-input">
+            <button type="submit" >
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_search"></use>
+                </svg>
+            </button>
+        </form>
+    </div>
+    <div class="profile">
+        {if $theme_settings.phone_1}
+        <a href="javascript:void(0);" class="icon-phone-link" onclick="toogleClass('#contacts-popup','hidden','unhidden'); onClickClose('contacts-popup','');addClass(body,'overflow-hidden');return true;">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_call2"></use>
+            </svg>
+            <p>Контакты</p>
+        </a>
+        {/if}
+        <a href="/compare/" class="compare-link" title="Сравнение товаров">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_compare"></use>
+            </svg>
+            {if $compare_products_count>0 && !empty($compare_cookie[0])}
+            <span class="red-dot-counter unhidden" id="header-fixed-compare-counter">{$compare_products_count}</span>
+            {else}
+            <span class="red-dot-counter hidden" id="header-fixed-compare-counter">0</span>
+            {/if}
+            <p>Сравнение</p>
+        </a>
+        {if $wa->isAuthEnabled()}
+        <!-- auth links -->
+        {if $wa->user()->isAuth()}
+        <div class="profile-block">
+            <a href="{$wa->getUrl('shop/frontend/my')}" class="profile-link" title="Профиль пользователя">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_account"></use>
+                </svg>
+                <p>Аккаунт</p>
+            </a>
+            <div class="profile-dropdown-menu">
+                <a href="{$wa->getUrl('/frontend/myProfile')}">Профиль</a>
+                <a href="{$wa->getUrl('/frontend/myOrders')}">Заказы</a>
+                <a href="?logout">[`Logout`]</a>
+            </div>
+        </div>
+        {else}
+        <a href="{$wa->loginUrl()|escape}" class="shopping-cart" title="Регистрация / Вход">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_account"></use>
+            </svg>
+            <p>Войти</p>
+        </a>
+        {/if}
+
+        {/if}
+
+        {$_cart_url = $wa->getUrl('shop/frontend/cart')}
+        {if method_exists($wa->shop, 'checkout')}
+        {$_cart_url = $wa->shop->checkout()->cartUrl()}
+        {/if}
+        <a href="{$_cart_url}" class="shopping-cart" title="Корзина">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_cart"></use>
+            </svg>
+            {if $wa->shop->cart->items()}<span class="red-dot-counter">{$wa->shop->cart->count()}</span>{/if}
+            <p>Корзина</p>
+        </a>
+    </div>
+
+    </div>
+</div>
+{/strip}

@@ -1,0 +1,214 @@
+
+{strip}
+<div class="cart">
+    <!-- add to cart -->
+    <form id="cart-form{if $wa->get('cart')}-dialog{/if}" method="post" action="{$wa->getUrl('/frontendCart/add')}">
+
+        {if $product.sku_type}
+        <!-- SELECTABLE FEATURES selling mode -->
+        {$default_sku_features = $product.sku_features}
+        {$product_available = $product.status}
+        <div class="options">
+            {foreach $features_selectable as $f}
+            {$f.name}:
+            <select data-feature-id="{$f.id}" class="sku-feature" name="features[{$f.id}]">
+                {foreach $f.values as $v_id => $v}
+                <option value="{$v_id}" {if $v_id== ifset($default_sku_features[$f.id])}selected{/if}>{$v}</option>
+                {/foreach}
+            </select>
+            <br>
+            {/foreach}
+        </div>
+        {else}
+
+        <!-- FLAT SKU LIST selling mode -->
+        {$product_available = false}
+        {if count($product.skus) > 1}
+
+        {* SKU selector *}
+
+        <ul class="skus">
+            {foreach $product.skus as $sku}
+            {$sku_available = $product.status && $sku.available && ($wa->shop->settings('ignore_stock_count') ||
+            $sku.count === null || $sku.count > 0)}
+            <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <meta itemprop="priceCurrency" content="{$wa->shop->currency()}">
+                <meta itemprop="price" content="{shop_currency($sku.price, $product.currency, null, 0)}">
+
+                <label{if !$sku.available} class="disabled"{/if}>
+                <input name="sku_id" type="radio" value="{$sku.id}" {if !$sku.available} disabled="true" {/if}{if
+                !$sku_available}data-disabled="1"{/if}{if $sku.id == $product.sku_id} checked="checked"{/if}
+                data-compare-price="{shop_currency($sku.compare_price, $product.currency, null, 0)}"
+                data-price="{shop_currency($sku.price, $product.currency, null, 0)}"{if $sku.image_id}
+                data-image-id="{$sku.image_id}"{/if}> <span itemprop="name">{$sku.name|escape}</span>
+                {if $sku.sku}<span class="hint" itemprop="name">{$sku.sku|escape}</span>{/if}
+                <span class="price tiny nowrap">{shop_currency_html($sku.price, $product.currency)}</span>
+                {if (!($sku.count === null) && $sku.count <= 0)}
+                <link itemprop="availability" href="http://schema.org/OutOfStock">
+                {else}
+                <link itemprop="availability" href="http://schema.org/InStock">
+                {/if}
+                </label>
+            </li>
+            {$product_available = $product_available or $sku_available}
+            {/foreach}
+        </ul>
+        {else}
+
+        {* in case there is only one SKU, don't display the selector *}
+
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            {$sku = $product.skus[$product.sku_id]}
+            {if $sku.sku}<span class="hint" itemprop="name">{$sku.sku|escape}</span>{/if}
+            <meta itemprop="priceCurrency" content="{$wa->shop->currency()}">
+            <meta itemprop="price" content="{shop_currency($sku.price, $product.currency, null, 0)}">
+            {if !$sku.available}
+            <link itemprop="availability" href="http://schema.org/Discontinued">
+            <p><em class="bold error">[`This product is not available for purchase`]</em></p>
+            {elseif !$wa->shop->settings('ignore_stock_count') && !($sku.count === null || $sku.count > 0)}
+            <link itemprop="availability" href="http://schema.org/OutOfStock">
+            {else}
+            <link itemprop="availability" href="http://schema.org/InStock">
+            {/if}
+            <input name="sku_id" type="hidden" value="{$product.sku_id}">
+            {$product_available = $product.status && $sku.available && $product.price > 0 && $product.price != 999999 && ($wa->shop->settings('ignore_stock_count') ||
+            $sku.count === null || $sku.count > 0)}
+        </div>
+
+        {/if}
+
+        {/if}
+
+        <!-- stock info -->
+        {if $product_available || count($product.skus) > 1}
+        <div class="stocks">
+            {function name=in_stock n=0 low=5 critical=2}
+            {if $n > $low or $n === null}
+            <strong class="stock-high">[`In stock`]</strong>
+            {elseif $n > $critical}
+            <strong class="stock-low">[`In stock`]</strong>
+            {elseif $n > 0}
+            <strong class="stock-critical">[`In stock`]</strong>
+            {else}
+            <strong class="stock-none"><i class="icon16 stock-transparent"></i>{if
+                $wa->shop->settings('ignore_stock_count')}[`Pre-order only`]{else}[`Out of stock`]{/if}
+            </strong>
+            {/if}
+            {/function}
+            {foreach $product.skus as $sku}
+            <div {if $sku.id !=$product.sku_id}style="display:none"{/if} class="sku-{$sku.id}-stock">
+                {if $sku.stock}
+                {foreach $stocks as $stock_id => $stock}
+                {if isset($sku.stock[$stock_id])}
+                {$stock_count = $sku.stock[$stock_id]}
+                {else}
+                {$stock_count = null}
+                {/if}
+                {$stock.name}: {in_stock n=$stock_count low=$stock.low_count critical=$stock.critical_count}
+                <br>
+                {/foreach}
+                {else}
+                {in_stock n=$sku.count}
+                {/if}
+            </div>
+            {/foreach}
+            {if $product.sku_type}
+            <div class="sku-no-stock">
+                <strong class="stock-none">[`Product with the selected option combination is not available for
+                    purchase`]</strong>
+            </div>
+            {/if}
+        </div>
+        {/if}
+        <!-- price -->
+        <div class="prices">
+            {if $product.price != 0 && $product.price != 999999 && $product_available || count($product.skus) > 1}
+                {if $product.compare_price > 0}
+                <span data-price="{shop_currency($product.price, null, null, 0)}" class="price nowrap">{shop_currency_html($product.price)}</span>
+                <span class="compare-at-price nowrap"> {shop_currency_html($product.compare_price)} </span>
+                {else}
+                <span data-price="{shop_currency($product.price, null, null, 0)}" class="price nowrap margin__auto">{shop_currency_html($product.price)}</span>
+                {/if}
+            {else}
+            <br>
+            {/if}
+        </div>
+        {if $sku.sku == "12374" || $sku.sku == "12378" || $sku.sku == "12379" }<div class="fancybox-error">Предложение действует до конца октября.</div>{/if}
+        {if $product_available  || count($product.skus) > 1}
+        <div class="add2cart margin__small_bottom">
+            <input type="hidden" name="product_id" value="{$product.id}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="submit" {if !$product_available}disabled="disabled" {/if} value="[`Add to cart`]" class="button button-color button-color_bg-black margin__smallest_bottom">
+            {shopStorequickorderPlugin::product_button()}
+        </div>
+        <div class="frontend-plugin-hook">
+           {foreach $frontend_product as $plugin => $_}
+                {if $plugin === 'storequickorder-plugin' || $plugin === 'arrived-plugin' || $plugin === 'freedelivery-plugin'}
+                    {continue}
+                {else}
+                    {if is_array($_) && !empty($_.cart)}
+                        {$_.cart}
+                    {/if}
+                {/if}
+           {/foreach}
+       </div>
+        {else}
+        <div class="add2cart margin__small_bottom arrived-button">
+            {foreach $frontend_product as $plugin => $_}
+                {if $plugin === 'arrived-plugin'}
+                        {if is_array($_) && !empty($_.cart)}
+                            {$_.cart}
+                        {/if}
+                {else}
+                    {continue}
+                {/if}
+            {/foreach}
+        </div>
+        {/if}
+       {if $services && $product_available || count($product.skus) > 1}
+       <!-- services -->
+        <div class="services">
+            {foreach $services as $s}
+            <div class="service-{$s.id}">
+                <label class="color-label">
+                    <input data-price="{shop_currency($s.price, $s.currency, null, 0)}" {if !$product_available}disabled="disabled" {/if} type="checkbox" name="services[]"
+                    value="{$s.id}">
+                    <span class="color-label-text"> {$s.name|escape} {if $s.price && !isset($s.variants)}(+<span class="service-price">{shop_currency_html($s.price, $s.currency)}</span>){/if}</span>
+                </label>
+                {if isset($s.variants)}
+                <select data-variant-id="{$s.variant_id}" class="service-variants" name="service_variant[{$s.id}]"
+                        disabled>
+                    {foreach $s.variants as $v}
+                    <option {if $s.variant_id== $v.id}selected{/if} data-price="{shop_currency($v.price, $s.currency, null, 0)}" value="{$v.id}">{$v.name|escape}
+                    (+{shop_currency($v.price, $s.currency)})</option>
+                    {/foreach}
+                </select>
+                {else}
+                <input type="hidden" name="service_variant[{$s.id}]" value="{$s.variant_id}">
+                {/if}
+            </div>
+            {/foreach}
+        </div>
+        {/if}
+    </form>
+    <!-- compare -->
+    <div class="buttons-color-bg-block margin__small_top">
+        <div class="compare">
+            <button data-product="{$product.id}" data-product-type="{$product.type_id}" class="clear-button  unhidden compare-button-{$product.id}"
+                    onclick="toogleClass('.compare-button-' + {$product.id}, 'unhidden', 'hidden');toogleClass('.uncompare-button-' + {$product.id}, 'hidden', 'unhidden');addCompare({$product.id},'{$product.name}');return true;">
+                [`Add to comparison table`]
+            </button>
+            <button data-product="{$product.id}" class="clear-button hidden uncompare-button-{$product.id}"
+                    onclick="toogleClass('.uncompare-button-' + {$product.id}, 'unhidden', 'hidden');toogleClass('.compare-button-' + {$product.id}, 'hidden', 'unhidden');removeCompare({$product.id},'{$product.name}');return true;">
+                [`Remove from comparison table`]
+            </button>
+        </div>
+        {if $product.type_id==2 || $product.type_id==26 || $product.type_id==27 || $product.type_id==28}
+        <div class="drivers-container margin__small_top">
+            <a href="https://help.aoc-gaming.ru/drivers?model={$sku.sku|replace:'/':'%2F'}" title="Скачать драйвера для {$sku.sku|escape}" target="_blank"> Скачать драйвера </a>
+        </div>
+        {/if}
+        <!-- plugin hook: 'frontend_product.cart' -->
+    </div>
+</div>
+{/strip}

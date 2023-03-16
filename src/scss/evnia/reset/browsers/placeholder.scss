@@ -1,0 +1,55 @@
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: var(--white-98);
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: var(--white-98);
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: var(--white-98);
+}
+
+:focus::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: var(--black);
+}
+
+:focus::-moz-placeholder {
+  /* Firefox 19+ */
+  color: var(--black);
+}
+
+:focus:-ms-input-placeholder {
+  /* IE 10+ */
+  color: var(--black);
+}
+
+:focus:-moz-placeholder {
+  /* Firefox 18- */
+  color: var(--black);
+}
+
+:disabled::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: var(--white-10);
+}
+
+:disabled::-moz-placeholder {
+  /* Firefox 19+ */
+  color: var(--white-10);
+}
+
+:disabled:-ms-input-placeholder {
+  /* IE 10+ */
+  color: var(--white-10);
+}
+
+:disabled:-moz-placeholder {
+  /* Firefox 18- */
+  color: var(--white-10);
+}

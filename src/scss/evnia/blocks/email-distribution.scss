@@ -1,0 +1,211 @@
+.email-distribution {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5rem 0;
+  @media (min-width: 768px) {
+    padding: 0;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    & #email-distribution__form-custom {
+      & > div {
+        width: 280px;
+        margin: 0 auto;
+        padding: 0;
+      }
+      & > div .wa-fill, & > div .wa-submit {
+        width: 220px;
+      }
+      & .wa-after-submit {
+        background-color: var(--black) !important;
+      }
+      & .wa-errormsg {
+        position: absolute;
+        top: -15px;
+        left: 30px;
+        @media (min-width: 768px) {
+          left: 0;
+        }
+        @media (min-width: 1050px) {
+          left: 80px;
+        }
+      }
+    }
+  }
+  &__description {
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0 auto 1.25rem auto;
+    font-size: 1.95rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  &__subtitle {
+    display: block;
+    margin: 0 auto 2.25rem auto;
+    line-height: 25px;
+    color: var(--white-95);
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+
+  &__form {
+    text-align: center;
+    & .wa-fill {
+      width: 224px;
+    }
+
+    & input[type=submit] {
+      margin-top: 15px;
+      padding: 0.8rem;
+      min-height: 3rem;
+      height: 3rem;
+      width: 94%;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: 300;
+      text-transform: uppercase;
+      background-color: var(--white-35);
+      background-image: none;
+      border: none;
+      &:hover {
+        color: var(--black);
+        background-color: var(--white) !important;
+      }
+    }
+
+    & input[type=text] {
+      min-height: 3rem;
+      height: 3rem;
+
+      &::placeholder {
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: 300;
+      }
+
+      &:focus {
+        text-transform: capitalize;
+        color: inherit;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .email-distribution {
+    &__container {
+      & #email-distribution__form-custom {
+        & > div {
+          width: 320px
+        }
+        & > div .wa-fill, & > div .wa-submit {
+          width: 320px
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1050px) {
+  .email-distribution {
+    &__container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      & #email-distribution__form-custom {
+        & > div {
+          width: 500px;
+        }
+        & > div .wa-fill, & > div .wa-submit {
+          width: 220px;
+        }
+        & > div .wa-submit {
+          margin: 0 0 0 1rem;
+        }
+      }
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & form {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    &__description {
+      text-align: left;
+      width: 50%;
+    }
+
+    &__title {
+      margin: 0 auto 0.65rem auto;
+    }
+
+    &__subtitle {
+      margin: 0;
+      width: 425px;
+    }
+  }
+}
+
+@media (min-width: 1250px) {
+  .email-distribution {
+
+    &__container {
+      & #email-distribution__form-custom {
+        & > div {
+          width: 600px;
+        }
+        & > div .wa-fill, & > div .wa-submit {
+          width: 240px;
+        }
+        & > div .wa-submit {
+          margin: 0 0 0 1rem;
+        }
+      }
+    }
+
+    &__subtitle {
+      width: initial;
+    }
+
+  }
+}
+
+@media (min-width: 1550px) {
+  .email-distribution {
+
+    &__container {
+      margin: 0 auto;
+      width: 80rem !important;
+      & #email-distribution__form-custom {
+        & > div .wa-fill, & > div .wa-submit {
+          width: 290px;
+        }
+      }
+    }
+
+    &__description {
+      width: 60rem;
+    }
+
+  }
+}

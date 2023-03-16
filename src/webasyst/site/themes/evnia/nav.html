@@ -1,0 +1,236 @@
+{strip}
+<div class="nav" id="main-nav">
+    <div class="container">
+        <div class="search">
+            <button id="search-button" onclick="addClass(document.getElementById('main-nav'),'search__nav');document.getElementById('search-form-input').focus();return true;">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_search"></use>
+                </svg>
+            </button>
+            <button class="search__close-button" onclick="removeClass(document.getElementById('main-nav'),'search__nav');return true;">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_plus"></use>
+                </svg>
+            </button>
+            <div class="search-form"  itemscope itemtype="https://schema.org/WebSite">
+                <meta itemprop="url" content="https://aoc-gaming.ru/">
+                <form method="get" action="{$wa->getUrl("shop/frontend/search")}" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+                {$_query = $smarty.get.query|default:''|escape}
+                <meta itemprop="target" content="https://aoc-gaming.ru/search/?query={literal}{query}{/literal}">
+                <input itemprop="query-input" type="text" name="query" value="{if !empty($_query)}{$_query}{/if}" placeholder="[`Search`]" id="search-form-input">
+                <input type="submit" value="Поиск" class="button button-color_bg-black">
+                </form>
+            </div>
+        </div>
+        <nav itemscope itemtype="http://schema.org/SiteNavigationElement">
+            {if $theme_settings.header_menu_number}
+            {$mainMenu_id = $wa->menu->get($theme_settings.header_menu_number)}
+            {else}
+            {$mainMenu_id = $wa->apps()}
+            {/if}
+            {foreach $mainMenu_id as $item}
+            <span itemprop="name"><a href="{$item.url}" itemprop="url">{$item.name}</a></span>
+            {/foreach}
+        </nav>
+        <div class="buttons">
+            <a class="button button-color button-color_bg-grey" href="https://aoc-gaming.ru/partnerstvo/">Компьютерным клубам</a>
+            <a class="button button-color button-color_bg-black" href="https://aoc-gaming.ru/showroom/">Шоу-рум</a>
+        </div>
+    </div>
+</div>
+
+<div {if $wa->shop->cart->count() > 0 } class="popup-menu-desktop pulse unhidden"{else}class="popup-menu-desktop unhidden"{/if}>
+    <a href="/order/" class="shopping-cart-button">
+        <svg class="icon">
+            <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_cart"></use>
+        </svg>
+        Корзина ({$wa->shop->cart->count()})
+    </a>
+    <a class="button-contacts" href="javascript:void(0);" onclick="toogleClass('#contacts-popup','hidden','unhidden');document.getElementById('call-b-close-x').click();return true">Контакты</a>
+</div>
+
+<div class="popup__wrap hidden" id="contacts-popup">
+    <div class="popup">
+        <div class="popup__header padding__small relative">
+            <h3>
+                Контакты
+            </h3>
+            <a class="close-button" href="javascript:void(0);" onclick="toogleClass('#contacts-popup','unhidden','hidden');">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_plus"></use>
+                </svg>
+            </a>
+        </div>
+        <div class="popup__content">
+            <ul class="popup__contacts">
+                <li>
+                    <span>Пн-Пт: с 9:00 до 18:00</span>
+                </li>
+                {if $theme_settings.phone_1}
+                    <li>
+                        <a href="tel:{$theme_settings.phone_1|regex_replace:"/[^0-9\\+]/":''}" class="phone-1 button button-grey-border">
+                        {$theme_settings.phone_1|escape}
+                        </a>
+                    </li>
+                {/if}
+                {if $theme_settings.phone_2}
+                    <li>
+                        <a href="tel:{$theme_settings.phone_2|regex_replace:"/[^0-9\\+]/":''}" class="phone-2 button button-grey-border">
+                        {$theme_settings.phone_2|escape}
+                        </a>
+                    </li>
+                {/if}
+                <li>
+                    <a href="javascript:void(0);"  class="button button-grey-border" onclick="toogleClass('#contacts-popup','unhidden','hidden');document.getElementById('call-back-button').click();">Обратный звонок</a>
+                </li>
+                <li>
+                    {if $theme_settings.email}
+                    <a href="mailto:{$theme_settings.email}" class="email">
+                        {$theme_settings.email|escape}
+                    </a>
+                    {/if}
+                </li>
+                <li>
+                    {if $theme_settings.address }<span class="hint">{$theme_settings.address}</span>{/if}
+                </li>
+                <li>
+                    {if $theme_settings.vk_link || $theme_settings.instagram_link || $theme_settings.facebook_link ||
+                    $theme_settings.youtube_link || $theme_settings.tiktok_link}
+                    <ul>
+                        {if $theme_settings.vk_link}
+                        <li>
+                            <a href="{$theme_settings.vk_link}">
+                                <svg class="icon">
+                                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_vk"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        {/if}
+                        {if $theme_settings.instagram_link}
+                        <li>
+                            <a href="{$theme_settings.instagram_link}">
+                                <svg class="icon">
+                                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_instagram"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        {/if}
+                        {if $theme_settings.facebook_link}
+                        <li>
+                            <a href="{$theme_settings.facebook_link}">
+                                <svg class="icon">
+                                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_facebook"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        {/if}
+                        {if $theme_settings.youtube_link}
+                        <li>
+                            <a href="{$theme_settings.youtube_link}">
+                                <svg class="icon">
+                                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_youtube"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        {/if}
+                        {if $theme_settings.tiktok_link}
+                        <li>
+                            <a href="{$theme_settings.tiktok_link}">
+                                <svg class="icon">
+                                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_tiktok"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        {/if}
+                    </ul>
+                    {/if}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="popup__wrap hidden" id="slide-menu-left">
+    <div class="popup">
+        <div class="popup__header padding__small relative">
+            <h3>
+                Каталог
+            </h3>
+            <a class="close-button" href="javascript:void(0);" onclick="toogleClass('#slide-menu-left','unhidden','hidden');return true;">
+                <svg class="icon">
+                    <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_plus"></use>
+                </svg>
+            </a>
+        </div>
+        <div class="popup__content">
+            <ul class="slide-menu-items">
+                {if $theme_settings.header_topbar_menu_number}
+                {$slideMenu_id = $wa->menu->get($theme_settings.header_topbar_menu_number)}
+                {else}
+                {$slideMenu_id = $wa->apps()}
+                {/if}
+                {foreach $slideMenu_id as $item}
+                <li>
+                    <a href="{$item.url}" itemprop="url">{$item.name}</a>
+                    {if !empty($item.childs)}
+                    <div class="menu-item-childs">
+                        {foreach $item.childs as $child}
+                        <div class="menu-item-child">
+                            <a href="{$item.url}">{$item.name}</a>
+                        </div>
+                        {/foreach}
+                    </div>
+                    {/if}
+                </li>
+                {/foreach}
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<div class="nav-fixed">
+    <div class="nav-fixed-item">
+        <a href="/">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_home"></use>
+            </svg>
+            <span>Главная</span>
+        </a>
+    </div>
+    <div class="nav-fixed-item">
+        <a href="#" onclick="toogleClass('#slide-menu-left','hidden','unhidden');onClickClose('slide-menu-left','');return true;">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_burger"></use>
+            </svg>
+            <span>Каталог</span>
+        </a>
+    </div>
+    <div class="nav-fixed-item">
+        <a href="{$wa->shop->checkout()->cartUrl()}" class="shopping-cart {if $wa->shop->cart->items()}active{/if}">
+            {if $wa->shop->cart->items()}<span class="red-dot">{$wa->shop->cart->count()}</span>{/if}
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_cart"></use>
+            </svg>
+            <span>Корзина</span>
+        </a>
+    </div>
+    <div class="nav-fixed-item">
+
+        <a href="#" onclick="closeModal('.modal_windows');toogleClass('.profile-menu-wrap','hidden','unhidden');">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_account"></use>
+            </svg>
+            <span>Профиль</span>
+        </a>
+    </div>
+    <div class="nav-fixed-item">
+        <a href="#" onclick="toogleClass('#contacts-popup','hidden','unhidden');onClickClose('contacts-popup','');return true;">
+            <svg class="icon">
+                <use xlink:href="{$wa_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_call"></use>
+            </svg>
+            <span>Контакты</span>
+        </a>
+    </div>
+</div>
+{/strip}

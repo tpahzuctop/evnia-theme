@@ -1,0 +1,14 @@
+{if isset($page.fullpage) && $page.fullpage !='true' && !empty($page.fullpage)}
+<div class="content container">
+	<div id="page" role="main">
+		<h1>{$page.name}
+		{$page.content}
+	</div>
+</div>
+{else}
+<div class="padding__big">
+	<div id="page" role="main" class="padding__big">
+		{$page.content}
+	</div>
+</div>
+{/if}

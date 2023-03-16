@@ -1,0 +1,409 @@
+.review{
+  background: var(--white-05);
+  border-radius: var(--border-radius-5);
+  padding: 2rem 3rem;
+  position: relative;
+  &-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    & .review-user {
+      min-width: 15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      margin-right: 2.5rem;
+      & > svg {
+        width: 90px;
+        height: 90px;
+        border-radius: 100px;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        background: var(--white-10);
+        fill: var(--white);
+        color: var(--white);
+      }
+      & .photo {
+        margin-bottom: 2rem;
+        & img {
+          width: 90px;
+          height: 90px;
+          border-radius: 100px;
+        }
+      }
+    }
+    & .review-description {
+      width: 100%;
+      background: var(--white-10);
+      color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 1rem 2rem;
+      line-height: 1.75;
+      & .review-header {
+        width: 100%;
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: 0.1em;
+        margin: .5rem 0 1rem 0;
+        color: #ff8502;
+        padding-left: 0;
+        text-align: center;
+        &::before{
+          display: none;
+        }
+      }
+    }
+  }
+  &-reply {
+    &-wrap {
+      width: 25rem;
+    }
+  }
+
+  & &-form {
+    margin: 2rem 0 0 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--white-15);
+  }
+
+  &-form {
+    padding-top: 4rem;
+    & form {
+      max-width: 90rem;
+      margin: 0 auto;
+    }
+    & .auth-type {
+      & li {
+        & a {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          & img {
+            display: inline-block;
+            margin: 0 0 .75rem 0;
+          }
+          @media (min-width: 1250px) {
+            flex-direction: row;
+            & img {
+              margin: 0 .75rem 0 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  &-field {
+    margin: 1rem .5rem;
+    & #review-title {
+      width: 100%;
+    }
+    & #review-text {
+      width: 100%;
+      min-height: 10rem;
+      height: 100%;
+      padding: .75rem 1rem;
+    }
+    & em.errormsg {
+      display: block;
+      color: var(--white);
+      margin: 1rem 0 0 0;
+      background: var(--base-color-red);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--border-radius-5);
+    }
+    & input.error, & textarea.error {
+      border-color:var(--base-color-red);
+      color: var(--base-color-red);
+      &::-webkit-input-placeholder {
+        color: var(--base-color-red);
+      }
+      &::-moz-placeholder {
+        color: var(--base-color-red);
+      }
+      &:-ms-input-placeholder {
+        color: var(--base-color-red);
+      }
+      &:-moz-placeholder {
+        color: var(--base-color-red);
+      }
+      &:focus, &:active {
+        color: var(--white);
+        background: var(--base-color);
+        background: -moz-linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+        background: -webkit-linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+        background: linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--base-color-dark)", endColorstr=" var(--base-color) ", GradientType=1);
+        &::-webkit-input-placeholder {
+          color: var(--white);
+        }
+        &::-moz-placeholder {
+          color: var(--white);
+        }
+        &:-ms-input-placeholder {
+          color: var(--white);
+        }
+        &:-moz-placeholder {
+          color: var(--white);
+        }
+      }
+    }
+  }
+  &-field-guest {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1rem .5rem;
+    & input {
+      flex: 1;
+      margin-right: 1rem;
+      &.error {
+        border-color:var(--base-color-red);
+        color: var(--base-color-red);
+        &::-webkit-input-placeholder {
+          color: var(--base-color-red);
+        }
+        &::-moz-placeholder {
+          color: var(--base-color-red);
+        }
+        &:-ms-input-placeholder {
+          color: var(--base-color-red);
+        }
+        &:-moz-placeholder {
+          color: var(--base-color-red);
+        }
+        &:focus, &:active {
+          color: var(--white);
+          background: var(--base-color);
+          background: -moz-linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+          background: -webkit-linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+          background: linear-gradient(90deg, var(--base-color) 0%, var(--base-color-dark) 25%, var(--base-color-dark) 75%, var(--base-color) 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--base-color-dark)", endColorstr=" var(--base-color) ", GradientType=1);
+          &::-webkit-input-placeholder {
+            color: var(--white);
+          }
+          &::-moz-placeholder {
+            color: var(--white);
+          }
+          &:-ms-input-placeholder {
+            color: var(--white);
+          }
+          &:-moz-placeholder {
+            color: var(--white);
+          }
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    & em.errormsg {
+      display: block;
+      width: 100%;
+      color: var(--white);
+      margin: 1rem 0 0 0;
+      background: var(--base-color-red);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--border-radius-5);
+    }
+  }
+  &-submit {
+    padding: 2rem 0;
+    &_policy {
+      & label {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        & input {
+          margin-right: 1rem;
+        }
+        & a {
+          margin-left: .5rem;
+        }
+        & em.errormsg {
+          display: block;
+          color: var(--white);
+          margin: 0 0 0 4rem;
+          background: var(--base-color-red);
+          padding: 0.5rem 0.75rem;
+          border-radius: var(--border-radius-5);
+        }
+      }
+    }
+
+  }
+}
+
+.write-review {
+  background: var(--base-color-dark-hover);
+  border-radius: var(--border-radius-5);
+  padding: 0;
+  overflow: hidden;
+  transition: 500ms ease-in all;
+  & a {
+    color: var(--white);
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem;
+    &:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+  }
+  &::before{
+    display: none;
+  }
+}
+
+.summary{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+
+  .username{
+    line-height: 1.5;
+    font-size: 1rem;
+    letter-spacing: .07rem;
+    font-weight: 500;
+  }
+
+  .date{
+    line-height: 1;
+    font-size: 0.8rem;
+    color: gainsboro;
+  }
+  .reviews__user-info{
+    display: flex;
+    align-items: center;
+    margin-bottom: .6rem;
+  }
+
+  .user-avatar{
+    border-radius: 100%;
+    background-color: gainsboro;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-right: 0.625rem;
+    background-position: center;
+    background-size: contain;
+  }
+
+}
+
+.reviews {
+  &-branch {
+    padding-left: 15rem;
+  }
+  &-count {
+    display: inline-block;
+    margin-left: .5rem;
+  }
+}
+
+.actions{
+  .review-reply{
+      display: block;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+      text-align: center;
+      background: var(--base-color-dark-hover);
+      padding: 1rem;
+      margin: 2rem auto 0 auto;
+      border-radius: var(--border-radius-5);
+      transition: all 300ms ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    &:hover{
+      color: var(--black);
+      background: var(--white);
+    }
+  }
+}
+
+.preview__img{
+  display: flex;
+  align-items: center;
+
+  .img__list{
+    display: flex;
+    align-items: center;
+  }
+
+  .img__list-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.375rem;
+    height: 5.625rem;
+    background-color: gainsboro;
+    margin: 0.625rem 0.625rem 0.625rem 0;
+    overflow: hidden;
+    &:hover{
+      cursor: pointer;
+    }
+
+    img{
+      width: inherit;
+    }
+  }
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  margin: 1rem 0 1rem 0;
+  border-radius: 50%;
+}
+
+.rate-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1rem .5rem;
+    & svg, & i {
+      width: 2rem;
+      height: 2rem;
+    }
+    & .star-empty {
+      & svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: .25rem;
+        fill: var(--white-45);
+        color: var(--white-45);
+      }
+    }
+    & .star-active {
+      & svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: .25rem;
+        fill: var(--base-color-dark-hover);
+        color: var(--base-color-dark-hover);
+      }
+    }
+}

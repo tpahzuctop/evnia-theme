@@ -1,0 +1,60 @@
+header, .nav, main, footer, header .topbar {
+  max-width: 100vw;
+  min-width: 280px;
+}
+
+.container {
+  min-width: 20rem;
+  width: auto;
+  margin: 0 1rem;
+  @media (min-width: 393px) {
+    margin: 0 2rem;
+  }
+  @media (min-width: 768px) {
+    margin: 0 3rem;
+  }
+  @media (min-width: 1050px) {
+    width: 60rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 1250px) {
+     width: 75rem;
+  }
+  @media (min-width: 1550px) {
+    width: 93.75rem;
+  }
+  @media (min-width: 1850px) {
+    width: 112.5rem;
+  }
+  @media (min-width: 2150px) {
+    width: 131.25rem;
+  }
+}
+
+.info-product.container {
+  min-width: 20rem;
+  width: auto;
+  margin: 0 1.25rem;
+  @media (min-width: 393px) {
+    margin: 0 2rem;
+  }
+  @media (min-width: 768px) {
+    margin: 0 3rem;
+  }
+  @media (min-width: 1050px) {
+    width: 60rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 1250px) {
+    width: 75rem;
+  }
+  @media (min-width: 1550px) {
+    width: 93.75rem;
+  }
+  @media (min-width: 1850px) {
+    width: 112.5rem;
+  }
+  @media (min-width: 2150px) {
+    width: 131.25rem;
+  }
+}

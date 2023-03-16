@@ -1,0 +1,63 @@
+{if !empty($ajax_append)}<li data-id={$review.id} data-parent-id="{$review.parent_id}">{/if}
+
+
+<div class="review margin__big_vertical" itemprop="review" itemscope itemtype="http://schema.org/Review">
+    <div class="review-text">
+        <div class="review-user">
+            {if !empty({$review.author.photo_url_50})}
+                <div class="photo">
+                    <img src="{$review.author.photo_url_50}" alt="{$review.author.name}">
+                </div>
+            {else}
+                <svg>
+                    <use xlink:href="{$wa_parent_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_account"></use>
+                </svg>
+            {/if}
+            {if empty($review.site)}
+            <span class="username" itemprop="author">{$review.author.name}</span>
+            {else}
+            <a href="{$review.site}" class="username" itemprop="author">{$review.author.name}</a>
+            {/if}
+
+            <meta itemprop="datePublished" content="{$review.datetime|date_format:'Y-m-d'}">
+            <span class="date hint" title="{$review.datetime|wa_datetime}">{$review.datetime|wa_datetime:"humandatetime"}</span>
+
+            {if $review.rate}
+                <div class="rating">
+                    {for $foo=1 to 5}
+                    <i {if $review.rate|string_format:'%d' > $foo || $review.rate|string_format:'%d' == $foo}class="rating-star star-active"{else}class="rating-star star-empty"{/if}>
+                        <svg>
+                            <use xlink:href="{$wa_parent_theme_url}svg/symbols-sprite.svg#agonbyaoc-icon_star"></use>
+                        </svg>
+                    </i>
+                    {/for}
+                </div>
+            {/if}
+            {if !$review.parent_id && !empty($review.rate)}
+            <span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                {$rate = round($review.rate)}
+                <meta itemprop="worstRating" content = "1">
+                <meta itemprop="ratingValue" content="{$rate}">
+                <meta itemprop="bestRating" content = "5">
+                {$wa->shop->ratingHtml($rate)}
+            </span>
+            {/if}
+        </div>
+        <div class="review-description">
+            {if $review.title}
+            <h3 class="review-header">
+                <span itemprop="name">{$review.title}</span>
+            </h3>
+            {/if}
+            {if $review.text}
+            <p itemprop="description">{$review.text}</p>
+            {/if}
+        </div>
+    </div>
+    {if !empty($ajax_append)}<ul class="menu-v with-icons reviews-branch"></ul></li>{/if}
+    {if $reply_allowed}
+    <div class="actions review-reply-wrap">
+        <a href="{if isset($reply_link)}{$reply_link}{else}#{/if}" class="review-reply inline-link"><strong>[`reply`]</strong></a>
+    </div>
+    {/if}
+</div>

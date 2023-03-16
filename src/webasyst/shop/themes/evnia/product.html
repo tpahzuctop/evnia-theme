@@ -1,0 +1,301 @@
+{strip}
+
+{assign var="productSeries" value="aoc-gaming"}
+
+{foreach from=$product.categories key=k item=v}
+    {if $k == 102}
+        {assign var="productSeries" value="aoc-agon-pro"}
+    {/if}
+    {if $k == 2}
+        {assign var="productSeries" value="aoc-agon"}
+    {/if}
+    {if $k == 97}
+        {assign var="productSeries" value="b2b"}
+    {/if}
+{/foreach}
+<section itemscope itemtype="http://schema.org/Product">
+    <div class="product-promo">
+        <nav aria-label="Breadcrumb" class="breadcrumb container padding__medium_vertical">
+            <ul itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="{$wa_app_url}" itemprop="item"><span itemprop="name">Главная</span></a>
+                    <meta itemprop="position" content="{counter}">
+                </li>
+                {if "/" != $wa->currentUrl()}
+                {if $product.name}
+                {$pageName=$product.name|escape}
+                {else}
+                {if $category.name}
+                {$pageName=$category.name}
+                {else}
+                {if $page.name}
+                {$pageName=$page.name}
+                {else}
+                {$pageName=$wa->title()}
+                {/if}
+                {/if}
+                {/if}
+                {if !empty($breadcrumbs)}
+                {foreach $breadcrumbs as $breadcrumb}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="{$breadcrumb.url}" itemprop="item">
+                        <span itemprop="name">{$breadcrumb.name|escape}</span>
+                        <meta itemprop="position" content="{counter}">
+                    </a>
+                </li>
+                {/foreach}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="{$wa->currentUrl()}" itemprop="item">
+                        <span itemprop="name">{$pageName|escape}</span>
+                        <meta itemprop="position" content="{counter}">
+                    </a>
+                </li>
+                {else}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="{$wa->currentUrl()}" itemprop="item">
+                        <span itemprop="name">{$pageName|escape}</span>
+                        <meta itemprop="position" content="{counter}">
+                    </a>
+                </li>
+                {/if}
+                {/if}
+            </ul>
+        </nav>
+
+
+        <!-- SIDEBAR -->
+        <article class="product-short-info container">
+            <h1 itemprop="name">
+                {foreach $product.skus as $sku}
+                {$product.name}
+                {/foreach}
+                {if !empty($product.rating) && $product.rating > 0}
+                <span class="rating nowrap" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" title="{sprintf('[`Average user rating: %s / 5`]', $product.rating)}">
+            {$wa->shop->ratingHtml($product.rating, 16)}
+            <span itemprop="ratingValue" style="display: none;">{$product.rating}</span>
+            <span itemprop="reviewCount" style="display: none;">{$reviews_total_count}</span>
+            </span>
+                {/if}
+            </h1>
+            <div class="product-short-info-features">
+                <!-- product features -->
+                {if $product.features}
+                {foreach $product.features as $f_code => $f_value}
+                {if $f_code=="tip_matritsy" || $f_code=="razreshenie" || $f_code=="chastota_smeny_kadrov" || $f_code=="vremya_otklika" || $f_code=="maksimalnaya_nagruzka" || $f_code=="kolichestvo_knopok" || $f_code=="datchik_myshi" || $f_code=="podsvetka" || $f_code=="narabotka_na_otkaz"}
+                <div class="feature-block">
+                    <strong>{$features[$f_code].name|escape}</strong>
+                    {$f_value}
+                </div>
+                {/if}
+                {if $f_code=="tip_ekrana" || $f_code=="razmer_ekrana_dyuymy" || $f_code=="kolichestvo_monitorov" || $f_code=="nagruzka_kg"  || $f_code=="kreplenie_vesa" || $f_code=="shirina_stola" || $f_code=="dlina_stola" || $f_code=="vysota_stola" || $f_code=="chastota_oprosa_usb_porta" || $f_code=="pereklyuchateli" || $f_code=="audiokanaly" || $f_code=="napravlennost_mikrofona" || $f_code=="tip_mikrofona" ||  $f_code=="platforma" || $f_code=="konnektor" || $f_code=="konnektor"}
+                <div class="feature-block">
+                    <strong>{$features[$f_code].name|escape}</strong>
+                    {if is_array($f_value)}
+                    {if $features[$f_code].type == 'color'}
+                    {implode('<br > ', $f_value)}
+                    {else}
+                    {implode(', ', $f_value)}
+                    {/if}
+                    {else}
+                    {$f_value}
+                    {/if}
+                </div>
+                {/if}
+                {/foreach}
+                {/if}
+                <a href="#product-all-features" title="Характеристики товара {$product.name}" alt="Характеристики товара {$product.name}" onclick="document.getElementById('tab-features').checked = true;">Просмотреть все характеристики</a>
+            </div>
+            <div class="product-short-info-image">
+                {$wa->shop->badgeHtml($product.badge)}
+                <img data-srcset="{$wa->shop->productImgUrl($product, '430')}?v={$wa_theme_version}{$theme_settings.theme_version_reset} 430w,{$wa->shop->productImgUrl($product, '750')}?v={$wa_theme_version}{$theme_settings.theme_version_reset} 650w, {$wa->shop->productImgUrl($product, '970')}?v={$wa_theme_version}{$theme_settings.theme_version_reset} 750w,{$wa->shop->productImgUrl($product, '1200')}?v={$wa_theme_version}{$theme_settings.theme_version_reset} 800"
+                     srcset="{$wa_active_theme_url}/img/dummy200.png"
+                     sizes="(min-width: 720px) and (max-width:1849px) 430px,(min-width: 1850px) 650px,100vw"
+                     src="{$wa->shop->productImgUrl($product, '1200')}?v={$theme_settings.theme_version_images_reset}"
+                     itemprop="image" alt="{$product.name} в официальном интернет магазине AGONBYAOC.ru (AOC Россия)"
+                     title="{$product.name}"
+                     class="lazyload" lazyload="lazy" decoding="async">
+            </div>
+            {include file="product.cart.html" inline}
+        </article>
+    </div>
+    {if $wa->currentUrl(1,1) == 'https://aoc-gaming.ru/monitor-aoc-q27t1-porsche-design/' || $wa->currentUrl(1,1) == 'https://aoc-gaming.ru/monitor-aoc-u32u1/'}
+    {else}
+    {if count($product.images) > 1}
+    <article class="gallery-wrap">
+        {$_video = false}
+        {$_video_url = false}
+        {if $product->video}
+        {$_video = $product->getVideo(['96x96'])}
+        {if $_video.url}
+        {$_video_url = $_video.url}
+        {/if}
+        {/if}
+        {if $product.images}
+        <div class="gallery">
+            {/if}
+            <div class="swiper-wrapper">
+                {foreach $product.images as $image}
+                <div class="swiper-slide">
+                    <img itemprop="image" alt="{$product.name|escape|cat:' ':strip_tags($product.summary)|escape}" title="{$product.name}" data-src="{$wa->shop->imgUrl($image, '430')}?v={$theme_settings.theme_version_images_reset}" class="lazyload" lazyload="lazy" >
+                </div>
+                {/foreach}
+            </div>
+            <div class="swiper-button-next">Следующая</div>
+            <div class="swiper-button-prev">Предыдущая</div>
+        </div>
+        <a href="#" title="Просмотреть все изображения товара {$product.name}" alt="Просмотреть все изображения товара {$product.name}" class="gallery-link margin__auto  hidden">Просмотреть все изображения</a>
+    </article>
+
+    {if $_video_url}
+    <div id="video-container" class="video-container container padding__big_vertical margin__big_top" itemscope itemtype="http://schema.org/VideoObject">
+        <div class="video-wrapper" itemprop="embedHTML">
+            <iframe src="{$_video_url}" height="{$_video.height}" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+        <meta itemprop="width" content="{$_video.width}">
+        <meta itemprop="height" content="{$_video.height}">
+        <meta itemprop="name" content="{$product.name|default:''|escape}">
+        <meta itemprop="description" content="{$product.description|default:''|escape}">
+        <meta itemprop="uploadDate" content="{$product.create_datetime|default:''|escape}">
+        <meta itemprop="embedURL" content="{$_video_url}">
+        {if !empty($_video.images[0])}
+        {$_thumb = $_video.images[0]}
+        {$_absolute_thumb_uri = "{$wa->url(true)}{$_thumb|substr:1}"}
+        <meta itemprop="thumbnailUrl" content="{$_absolute_thumb_uri|escape}" >
+        {/if}
+    </div>
+    {/if}
+
+    {if $product.type_id==2 || $product.type_id==26 || $product.type_id==27 || $product.type_id==28}
+    <div id="drivers" class="drivers-container container margin__big_top">
+        <a href="https://help.aoc-gaming.ru/drivers?model={$sku.sku|replace:'/':'%2F'}" title="Скачать драйвера для {$sku.sku|escape}" target="_blank"> Скачать драйвера для {$sku.sku|escape} </a>
+    </div>
+    {/if}
+    {/if}
+    {/if}
+    <div class="product-content-wrap padding__big_vertical margin__big_top container" id="product-all-features">
+        <input class="tab-input" type="radio" name="tabs" id="tab-overview" checked>
+        <input class="tab-input" type="radio" name="tabs" id="tab-features">
+        <input class="tab-input" type="radio" name="tabs" id="tab-reviews">
+        <label class="tab-label" for="tab-overview">[`Description`]</label>
+        <label class="tab-label" for="tab-features">[`Features`]</label>
+        <label class="tab-label" for="tab-reviews">[`Reviews`]<span class="hint">&nbsp;({$reviews_total_count})</span></label>
+        {foreach $product.pages as $page}
+        <input class="tab-input" type="radio" name="tabs" id="tab-{$page@iteration}">
+        <label class="tab-label" for="tab-{$page@iteration}">{$page.name|escape}</label>
+        {/foreach}
+        <div class="content" id="overview">
+
+            {* @event frontend_product.%plugin_id%.block *}
+            {foreach $frontend_product as $plugin => $_}
+            {if is_array($_) && !empty($_.block)}
+            {$_.block}
+            {/if}
+            {/foreach}
+
+            {if $product.description}
+            <div class="description" id="product-description" itemprop="description">{$product.description}</div>
+            {/if}
+        </div>
+        <div class="content" id="features">
+            <!-- product features -->
+            {if $product.features}
+            <div class="features margin__big_top" id="product-features">
+                {foreach $product.features as $f_code => $f_value}
+                {if $features[$f_code].type == 'divider'}
+                <h3>
+                    {$features[$f_code].name|escape}
+                </h3>
+                {else}
+                <div class="feature-wrap">
+                    <div class="feature-name">
+                        {$features[$f_code].name|escape}
+                    </div>
+                    {$_true_params = ["weight", "brand", "model", "width", "height", "depth", "color", "manufacturer"]}
+                    {$_is_good_param = ($f_code|in_array:$_true_params)}
+                    {$_itemprop = ""}
+                    {if $_is_good_param}
+                    {$_itemprop = $f_code}
+                    {/if}
+
+                    <div class="feature-value" itemprop="{$_itemprop|escape}">
+                        {if is_array($f_value)}
+                        {if $features[$f_code].type == 'color'}
+                        {implode('<br > ', $f_value)}
+                        {else}
+                        {implode(', ', $f_value)}
+                        {/if}
+                        {else}
+                        {$f_value}
+                        {/if}
+                    </div>
+                </div>
+                {/if}
+                {/foreach}
+            </div>
+            {/if}
+        </div>
+        <div class="content" id="reviews">
+            <!-- product reviews -->
+            <div class="reviews">
+                <ul class="menu-v with-icons">
+                    {foreach $reviews as $review}
+                    <li data-id={$review.id} data-parent-id="0">
+                        {include file="review.html" reply_allowed=false inline}
+                    </li>
+                    {/foreach}
+                </ul>
+                {if !$reviews}
+                <p>{sprintf('[`Be the first to <a href="%s">write a review</a> of this product!`]', 'reviews/')}</p>
+                {else}
+                <div class="padding__small_vertical">
+                    {sprintf(_w(
+                    'Read <a href="%s">all %d review</a> on %s',
+                    'Read <a href="%s">all %d reviews</a> on %s',
+                    $reviews_total_count, false
+                    ), 'reviews/', $reviews_total_count, $product.name|escape)
+                    }
+                </div>
+                {/if}
+                {sprintf('[`<a href="%s" class="button button-color">Добавить комментарий</a>`]', 'reviews/')}
+            </div>
+        </div>
+        {foreach $product.pages as $page}
+        <div class="content" id="content-{$page@iteration}">
+            {$page.content}
+        </div>
+        {/foreach}
+
+    </div>
+</section>
+{/strip}
+
+{* ПОХОЖИЕ ТОВАРЫ И РЕКОМЕНДУЕМЫЕ
+<!-- RELATED PRODUCTS -->
+{$upselling = $product->upSelling()}
+{$crossselling = $product->crossSelling()}
+
+{if $upselling || $crossselling}
+<div class="content right300px">
+
+    {if $upselling}
+    <div class="related">
+        <h3>
+            [`See also`]
+            {$compare_ids = array_merge(array($product.id), array_keys($upselling))}
+            <input type="button" onClick="javascript:window.location='{$wa->getUrl('/frontend/compare', ['id' => implode(',', $compare_ids)])}';" value="[`Compare all`]" >
+
+        </h3>
+        {include file="list-table.html" products=$upselling}
+    </div>
+    {/if}
+
+    {if $crossselling}
+    <div class="related">
+        <h3>{sprintf('[`Customers who bought %s also bought`]', $product.name|escape)}</h3>
+        {include file="list-table.html" products=$crossselling}
+    </div>
+    {/if}
+
+</div>
+{/if}
+*}

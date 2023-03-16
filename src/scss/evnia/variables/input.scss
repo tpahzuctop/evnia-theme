@@ -1,0 +1,26 @@
+input[type="text"], input, textarea, select, .wa-input, .call-b-input input {
+  position: relative;
+  background: var(--black);
+  color: var(--white-90);
+  border-radius: var(--border-radius-5);
+  border: var(--border-size-input) solid var(--white-35);
+  outline: none;
+  min-height: 2.5rem;
+  height: 2.5rem;
+  max-height: 2.5rem;
+  padding: 0 1rem;
+  margin: .65rem 0;
+  &:focus, &:active {
+    color: var(--white)  !important;
+    border: var(--border-size-input) solid var(--base-color-dark-hover)  !important;
+  }
+  &:disabled {
+    color: var(--white-15) !important;
+    border: var(--border-size-input) solid var(--white-10) !important;
+    pointer-events:none;
+    &:focus, &:active {
+      color: var(--white-15) !important;
+      border: var(--border-size-input) solid var(--white-10) !important;
+    }
+  }
+}

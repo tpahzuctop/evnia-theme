@@ -1,0 +1,15 @@
+<div class="content padding__big_vertical">
+    <div id="page" role="main" class="login_registration_fogot-password">
+        <h1>[s`Login`]</h1>
+        <div class="container login_registration_fogot-password__content">
+            {$wa->authAdapters()}
+            {$wa->loginForm($error, empty($without_form))}
+        </div>
+    </div>
+</div>
+
+<script>
+    (function(){
+        $('.wa-field-onetime-password .wa-name').text('Сейчас Вам позвонит робот. Введите 4 последние цифры телефона, с которого поступит звонок');
+    }());
+</script>

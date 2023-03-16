@@ -1,0 +1,105 @@
+.swiper-container-clubs {
+  overflow-x: hidden;
+}
+
+.h1slider {
+  text-align: center;
+
+  & h2 {
+    padding: 0;
+  }
+
+}
+
+.www_rewiew_club {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+
+  & a {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: .25rem .5rem .25rem 1rem;
+    }
+
+  }
+}
+
+.item {
+  padding: 2.5rem 10%;
+}
+
+.adress_rewiew_club {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  padding: 2.5rem 1rem;
+  color: var(--base-color);
+
+  & ul {
+    list-style: none;
+    padding-left: 1rem;
+  }
+
+}
+
+.models_rewiew_club {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  padding: 1rem;
+
+  & li {
+    padding: 0.5rem;
+  }
+
+}
+
+p.rewiew_club {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.partner_aoc {
+  text-align: center;
+}
+
+.swiper-club-photo {
+  padding-top: 3rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+  max-height: 900px;
+  max-width: 980px;
+  margin: 0 auto;
+
+  & .swiper-slide-active {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    & img {
+      max-height: 900px;
+      max-width: 980px;
+    }
+
+  }
+}
+

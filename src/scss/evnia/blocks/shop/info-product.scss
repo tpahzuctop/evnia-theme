@@ -1,0 +1,133 @@
+.info-product {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 1050px) {
+    padding-top: 2rem;
+  }
+}
+
+.info-product__row-bg {
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 150%;
+}
+
+.info-product__content {
+
+  margin: 2rem;
+  @media (min-width: 1550px) {
+    width: 90rem !important;
+  }
+}
+
+.info-product__content--move-right {
+  align-self: flex-end;
+}
+
+.info-product--row {
+  flex-direction: row;
+  @media (max-width: 1050px) {
+    flex-direction: column;
+  }
+}
+
+.info-product__content-title {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 2.625rem;
+  font-weight: 400;
+  line-height: 1.39;
+  letter-spacing: 0.3em;
+  &::before {
+    display: none;
+  }
+  @media (min-width: 1850px) {
+    font-size: 3rem;
+  }
+  @media (max-width: 1050px) {
+    font-size: 1.25rem;
+  }
+}
+
+.info-product__content-title--thin-text{
+  font-weight: 300;
+}
+
+.agon-text-shadow {
+  text-shadow: 0 0 14px #ff2121, 0 0 5.84887px rgb(255 33 33 / 72%),
+  0 0 0.387416px rgb(255 33 33 / 28%);
+}
+
+.agon-pro-text-shadow {
+  text-shadow: 0 0 14px rgb(115 40 205 / 70%),
+  0 0 5.84887px rgb(115 40 205 / 71%), 0 0 3.12708px rgb(115 40 205 / 50%),
+  0 0 1.75302px rgb(115 40 205 / 50%), 0 0 0.931014px rgb(115 40 205 / 40%),
+  0 0 0.387416px rgb(115 40 205 / 28%);
+}
+
+.gaming-text-shadow {
+  text-shadow: 0 0 14px rgb(241 138 52 / 70%),
+  0 0 5.84887px rgb(241 138 52 / 71%), 0 0 3.12708px rgb(241 138 52 / 50%),
+  0 0 1.75302px rgb(241 138 52 / 50%), 0 0 0.931014px rgb(241 138 52 / 40%),
+  0 0 0.387416px rgb(241 138 52 / 28%);
+}
+
+.device-text-shadow {
+  text-shadow: 0 0 14px rgb(97 30 114 / 70%), 0 0 5.84887px rgb(78 25 78 / 71%),
+  0 0 0.387416px rgb(237 226 243 / 28%);
+}
+
+.info-product__content-text {
+  margin: 1rem 0 1rem;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+  line-height: 1.55;
+}
+
+.info-product__img {
+  margin: 7.5rem 0;
+  width: 100%;
+  @media (max-width: 1050px) {
+    margin: 0;
+  }
+}
+
+
+.info-product__img--row-text {
+  margin: 0;
+}
+
+.info-product__content-img {
+  position: relative;
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(100%);
+}
+
+.info-product__content-bg {
+  position: absolute;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  & picture {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    img {
+      width: 100%;
+      transform: scale(1);
+      transition: all 1s ease-out;
+    }
+  }
+}

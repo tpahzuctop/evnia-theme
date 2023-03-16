@@ -1,0 +1,95 @@
+.popup {
+  z-index: 9992;
+  position: relative;
+  min-width: 280px;
+  width: 85vw;
+  max-width: 300px;
+  background: var(--black);
+  height: 100%;
+  overflow: hidden;
+  @media (min-width: 1050px) {
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    border: var(--border-size) solid var(--base-color-dark);
+    border-radius: var(--border-radius);
+  }
+    &__wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: var(--white-98);
+      width: 100%;
+      height: 100%;
+      z-index: 9991;
+      @media (min-width: 1050px) {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        padding: 15vh;
+      }
+    }
+    &__header {
+      width: 100%;
+      min-height: 5rem;
+      height: 5rem;
+      max-height: 5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      & h3 {
+        width: 90%;
+        margin: 0;
+        padding: 0;
+        color: var(--white);
+        text-transform: uppercase;
+        @media (min-width: 393px) {
+          font-size: 1.215rem;
+        }
+      }
+    }
+    &__content {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-content: stretch;
+      justify-content: flex-start;
+      align-items: stretch;
+      border-top: 1px solid var(--base-color-dark);
+      height: calc(100% - 5rem);
+      @media (min-width: 1050px) {
+        height: auto;
+        justify-content: center;
+      }
+      & .slide-menu-items {
+        & li {
+          padding: .65rem 2.5rem;
+          border-top: 1px solid var(--white-15);
+          & a {
+            font-weight: 300;
+            color: var(--white);
+            &:hover, &:visited {
+              color: var(--white);
+            }
+          }
+          &:hover {
+            background: var(--base-color-dark);
+          }
+        }
+      }
+    }
+    &.hidden {
+      margin-right: 100vw;
+    }
+    &.unhidden {
+      margin-left: 0;
+    }
+}

@@ -1,0 +1,10 @@
+{$content}
+
+<!-- plugin hook: 'frontend_homepage' -->
+{* @event frontend_footer.%plugin_id% *}
+{foreach $frontend_footere as $plugin => $_}
+{if $plugin !== 'customerreviews-plugin'}
+{$_}
+{/if}
+{/foreach}
+<!-- plugin hook end: 'frontend_homepage' -->

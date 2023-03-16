@@ -1,0 +1,260 @@
+{strip}
+
+{$all_compare_products = []}
+{$types = []}
+{$compare_products_ids_by_type = []}
+
+{$all_compare_product_ids = $wa->shop->inComparison()}
+{$compare_products_count = count($all_compare_product_ids)}
+
+{foreach $all_compare_product_ids as $product_id}
+{$all_compare_products[$product_id] = $wa->shop->product($product_id)}
+{/foreach}
+
+{foreach $all_compare_products as $product}
+{if !isset($types[$product.type_id])}
+{$types[$product.type_id] = $product.type}
+{$compare_products_ids_by_type[$product.type_id] = []}
+{/if}
+{$compare_products_ids_by_type[$product.type_id][] = $product.id}
+{/foreach}
+
+{$add2cart_label = _wd('shop', 'Add to cart')}
+
+{$wa->globals("globalHeader", "[`Compare products`]")}
+
+<div class="container margin__big_top">
+    {if !empty($products)}
+    <div class="compare-wrap">
+        <div class="compare-content">
+            <div class="compare-title hidden">
+                <h1>[`Compare products`]</h1>
+            </div>
+            <div class="compare-head" id="compare-head">
+                <div class="compare-head-content">
+                <div class="compare-filters">
+                    <span>Тип товара:</span>
+                    <a href="/compare/" {if $wa->currentUrl() === "/compare/" }class="active"{/if}>Всё</a>
+                    {foreach $types as $type}
+                    {$_product_ids = $compare_products_ids_by_type[$type.id]}
+                    <a href="{$wa->getUrl('shop/frontend/compare', ['id' => implode(',', $_product_ids)])}" {if $wa->getUrl('shop/frontend/compare', ['id' => implode(',', $_product_ids)]) === $wa->currentUrl()}class="active"{/if}>{$type.name|escape}</a>
+                    {/foreach}
+                    <span>Характеристики:</span>
+                    <div class="compare-filters-features">
+                        <a id="compare-all" href="{$wa->getUrl('shop/frontend/compare', ['id' => implode(',', $_product_ids)])}" class="selected" onclick="toogleClass('.same', 'hidden', 'unhidden'); addClass(document.getElementById('compare-all'), 'selected'); removeClass(document.getElementById('compare-diff'), 'selected');return false;">[`All`]</a>
+                        <a id="compare-diff" href="{$wa->getUrl('shop/frontend/compare', ['id' => implode(',', $_product_ids)])}" onclick="toogleClass('.same', 'unhidden', 'hidden'); addClass(document.getElementById('compare-diff'), 'selected'); removeClass(document.getElementById('compare-all'), 'selected');return false;">
+                            Только отличия</a>
+                    </div>
+                    <div class="margin__small_top">
+                        {if $wa->currentUrl() === "/compare/" }
+                        <input id="compare-clear" class="button grey-border" type="button" value="[`Clear comparison list`]" onclick="deleteCookie('shop_compare');location.reload();">
+                        {else}
+                        <input id="compare-clear" class="button grey-border" type="button" value="[`Clear comparison list`]" onclick="deleteCookie('shop_compare');location.href = '/compare/'">
+                        {/if}
+                    </div>
+                </div>
+                <div class="compare-one-product  swiper-compare-one-product-name">
+                    <h2>Основная модель</h2>
+                    <div class="swiper-wrapper">
+                        {foreach $products as $p}
+                            <div class="compare-product swiper-slide compare-product-{$p.id}">
+                                <div class="compare-product-image">
+                                    <a href="{$wa->getUrl('/frontend/product/', ['product_url' => $product.url])}">
+                                        <img src="{$wa->shop->productImgUrl($p, '200', ['itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}" alt="{$p.name}">
+                                    </a>
+                                </div>
+
+                                {*  пока скрыт рейтинг
+                                {$p_rate = round($p.rating, 1)}
+                                <span>{$p_rate}</span>
+                                *}
+
+                                    <p class="compare_price">
+                                        {if  $p.in_stock > 0}
+                                            {if !empty($p.price) && !empty($p.compare_price) && $p.compare_price > $p.price }
+                                                {wa_currency_html ($p.compare_price, 'RUB')}<strike>{wa_currency_html ($p.price, 'RUB')}</strike>
+                                            {else}
+                                                {wa_currency_html ($p.price, 'RUB')}
+                                            {/if}
+                                        {/if}
+                                    </p>
+
+                                <h3 class="compare-product-name">
+                                    <a href="{$wa->getUrl('/frontend/product/', ['product_url' => $p.url])}" title="{$p.name}">{$p.name}</a>
+                                </h3>
+
+                                <div class="compare-product-buy">
+                                {if ($wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0) && $p.price > 0 && $p.price != 999999}
+                                                <form class="purchase addtocart" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('shop/frontendCart/add')}">
+                                                    <input type="hidden" name="product_id" value="{$p.id}">
+
+                                                    <input type="submit" value="{$add2cart_label}" onclick="toogleClass('product-btn-{$p.id}','product-btn-{$p.id}','product-btn-{$p.id} active');return true;" class="product-btn-{$p.id}">
+                                                    <span class="added2cart" style="display: none;">{sprintf('[`%s is now <a href="%s"><strong>in your shopping cart</strong></a>`]', $p.name, $_cart_url)}</span>
+                                                    {shopStorequickorderPlugin::product_button()}
+                                                </form>
+                                {else}
+                                        {shopArrivedPlugin::getFormHtml($p)}
+                                                <div class="pricing price-wrap hidden">
+                                                    {if $p.compare_price > 0}<span class="compare-at-price nowrap"> {shop_currency_html($p.compare_price)}</span> {/if}
+                                                    <span class="price out-of-stock nowrap">
+                                                    {if $wa->shop->settings('ignore_stock_count')}
+                                                    {_wd('shop', 'Pre-order only')}
+                                                    {else}
+                                                    {_wd('shop', 'Out of stock')}
+                                                    {/if}
+                                                    </span>
+                                                </div>
+                                        <input type="submit" value="{$add2cart_label}" onclick="" disabled class="hidden">
+                                {/if}
+                                
+                          
+                                </div>
+
+                              <a data-product="{$p.id}" class="clear-button" href="{$p.delete_url}"
+                                   onclick="removeCompare({$p.id},'{$p.name}');location.href = '{$p.delete_url}';return true;">
+                                    [`Remove from comparison table`]
+                                </a>
+                            </div>
+                        {/foreach}
+                    </div>
+                    <div class="swiper-compare-one-product-name-prev">
+                        <svg class="icon">
+                            <use xlink:href="/wa-apps/site/themes/agonbyaoc/svg/symbols-sprite.svg#agonbyaoc-icon_arrow-left"></use>
+                        </svg>
+                    </div>
+                    <div class="swiper-compare-one-product-name-next">
+                        <svg class="icon">
+                            <use xlink:href="/wa-apps/site/themes/agonbyaoc/svg/symbols-sprite.svg#agonbyaoc-icon_arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+                    {if count($products) > 1 }
+                            <div class="compare-products swiper-compare-name">
+                                <h2>Модели для сравнения</h2>
+                                <div class="swiper-wrapper">
+                                    {foreach $products as $p}
+                                    <div class="compare-product swiper-slide">
+                                        <div class="compare-product-image">
+                                            <a href="{$wa->getUrl('/frontend/product/', ['product_url' => $product.url])}">
+                                                <img src="{$wa->shop->productImgUrl($p, '200', ['itemprop' => 'image', 'alt' => $p.name, 'default' => '`$wa_theme_url`img/dummy200.png'])}" alt="{$p.name}">
+                                            </a>
+                                        </div>
+
+                                        {*  пока скрыт рейтинг
+                                        {$p_rate = round($p.rating, 1)}
+                                        <span>{$p_rate}</span>
+                                        *}
+
+                                        <p class="compare_price">
+                                            {if !empty($p.price) && !empty($p.compare_price) && $p.compare_price > $p.price }
+                                            {wa_currency_html ($p.compare_price, 'RUB')}<strike>{wa_currency_html ($p.price, 'RUB')}</strike>
+                                            {else}
+                                            {wa_currency_html ($p.price, 'RUB')}
+                                            {/if}
+                                        </p>
+                                        <h3 class="compare-product-name">
+                                            <a href="{$wa->getUrl('/frontend/product/', ['product_url' => $p.url])}" title="{$p.name}">{$p.name}</a>
+                                        </h3>
+
+                                        <div class="compare-product-buy">
+                                            {if ($wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0) && $p.price > 0 && $p.price != 999999}
+                                            <form class="purchase addtocart" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('shop/frontendCart/add')}">
+                                                <input type="hidden" name="product_id" value="{$p.id}">
+
+                                                <input type="submit" value="{$add2cart_label}" onclick="toogleClass('product-btn-{$p.id}','product-btn-{$p.id}','product-btn-{$p.id} active');return true;" class="product-btn-{$p.id}">
+                                                <span class="added2cart" style="display: none;">{sprintf('[`%s is now <a href="%s"><strong>in your shopping cart</strong></a>`]', $p.name, $_cart_url)}</span>
+                                                {shopStorequickorderPlugin::product_button()}
+                                            </form>
+                                            {else}
+                                            {shopArrivedPlugin::getFormHtml($p)}
+                                            <div class="pricing price-wrap hidden">
+                                                {if $p.compare_price > 0}<span class="compare-at-price nowrap"> {shop_currency_html($p.compare_price)}</span> {/if}
+                                                <span class="price out-of-stock nowrap">
+                                                                {if $wa->shop->settings('ignore_stock_count')}
+                                                                {_wd('shop', 'Pre-order only')}
+                                                                {else}
+                                                                {_wd('shop', 'Out of stock')}
+                                                                {/if}
+                                                                </span>
+                                            </div>
+                                            <input type="submit" value="{$add2cart_label}" onclick="" disabled class="hidden">
+                                            {/if}
+                                        </div>
+
+                                        <a data-product="{$p.id}" class="clear-button" href="{$p.delete_url}"
+                                                onclick="removeCompare({$p.id},'{$p.name}');location.href = '{$p.delete_url}';return true;">
+                                            [`Remove from comparison table`]
+                                        </a>
+                                    </div>
+                                    {/foreach}
+                                </div>
+                                <div class="swiper-compare-name-prev">
+                                    <svg class="icon">
+                                        <use xlink:href="/wa-apps/site/themes/agonbyaoc/svg/symbols-sprite.svg#agonbyaoc-icon_arrow-left"></use>
+                                    </svg>
+                                </div>
+                                <div class="swiper-compare-name-next">
+                                    <svg class="icon">
+                                        <use xlink:href="/wa-apps/site/themes/agonbyaoc/svg/symbols-sprite.svg#agonbyaoc-icon_arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                    {/if}
+            </div>
+            </div>
+            <div class="compare-list">
+                {foreach $features as $f_id=>$f}
+                <div class="compare-feature {if $f.same} same unhidden{/if}">
+                    <div class="compare-feature-title">{$f.name}</div>
+                    <div class="compare-feature-value-one-product swiper-compare-one-product">
+                        <div class="swiper-wrapper">
+                            {foreach $products as $p}
+                            {if isset($p.features[$f_id])}
+                            {if is_array($p.features[$f_id])}
+                            <div class="feature-product-compare-item swiper-slide">
+                                {implode('<br> ', $p.features[$f_id])}
+                            </div>
+                            {else}
+                            <div class="feature-product-compare-item swiper-slide">
+                                {$p.features[$f_id]}
+                            </div>
+                            {/if}
+                            {else}
+                            <div class="feature-product-compare-item swiper-slide gray">&mdash;</div>
+                            {/if}
+                            {/foreach}
+                        </div>
+                    </div>
+                    {if count($products) > 1 }
+                        <div class="compare-feature-value swiper-compare">
+                            <div class="swiper-wrapper">
+                                {foreach $products as $p}
+                                {if isset($p.features[$f_id])}
+                                {if is_array($p.features[$f_id])}
+                                <div class="feature-product-compare-item swiper-slide">
+                                    {implode('<br> ', $p.features[$f_id])}
+                                </div>
+                                {else}
+                                <div class="feature-product-compare-item swiper-slide">
+                                    {$p.features[$f_id]}
+                                </div>
+                                {/if}
+                                {else}
+                                <div class="feature-product-compare-item swiper-slide gray">&mdash;</div>
+                                {/if}
+                                {/foreach}
+                            </div>
+                        </div>
+                    {/if}
+                </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+    {else}
+    <div class="compare-wrap">
+        <p>[`Product comparison list is empty.`]</p>
+    </div>
+    {/if}
+</div>
+{/strip}

@@ -1,0 +1,415 @@
+{strip}
+
+{assign "find" array('/>', 'type="text/javascript"', 'type="text/css"')}
+{assign "repl" array('>', '', '')}
+
+
+{assign var="nameSeries" value=""}
+{if $product.categories || $category.id}
+    {foreach from=$product.categories key=k item=v}
+        {if $k == 102}
+            {assign var="nameSeries" value="series-agon-pro"}
+        {/if}
+        {if $k == 2}
+            {assign var="nameSeries" value="series-agon"}
+        {/if}
+        {if $k == 97}
+            {assign var="nameSeries" value="series-b2b"}
+        {/if}
+    {/foreach}
+    {if $category.id == 102}
+        {assign var="nameSeries" value="series-agon-pro"}
+    {/if}
+    {if $category.id == 2}
+        {assign var="nameSeries" value="series-agon"}
+    {/if}
+    {if $category.id == 97}
+        {assign var="nameSeries" value="series-b2b"}
+    {/if}
+{/if}
+
+<!DOCTYPE html>
+<html lang="ru" class="{$nameSeries|escape}">
+<head itemscope itemtype="http://schema.org/WPHeader">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title itemprop="headline">{$wa->title()|escape} {$wa->globals("globalHeader")}</title>
+
+    {* Ключевики мета и для разметки *}
+
+    {if !empty($wa->meta('keywords'))}
+    <meta name="keywords" content="{$wa->meta('keywords')|escape}">
+    <meta itemprop="keywords" content="{$wa->meta('keywords')|escape}">
+    {else}
+    <meta name="keywords"
+          content="AOC,AOC-GAMING,AGON,AGON PRO,Игровые мониторы AOC,Геймерские аксессуары AOC,монитор,мониторы,монитор AOC,монитор AGON BY AOC,игровой монитор,монитор для дома,монитор для офиса,игровые мониторы">
+    <meta itemprop="keywords"
+          content="AOC,AOC-GAMING,AGON,AGON PRO,Игровые мониторы AOC,Геймерские аксессуары AOC,монитор,мониторы,монитор AOC,монитор AGON BY AOC,игровой монитор,монитор для дома,монитор для офиса,игровые мониторы">
+    {/if}
+
+
+    {* Мета-тег Description на странице *}
+
+    {if !empty($wa->meta('description'))}
+    <meta itemprop="description" content="{$wa->meta('description')|escape}">
+    <meta name="description" content="{$wa->meta('description')|escape}">
+    {else}
+    <meta itemprop="description"
+          content="{$wa->title()|escape} {$wa->globals('globalHeader')} - официальный интернет-магазин aoc-gaming.ru ( Игровые мониторы AGON BY AOC и морниторы для дома и офиса AOC) в России с официальной гарантией и доставкой по всей России.">
+    <meta name="description"
+          content="{$wa->title()|escape} {$wa->globals('globalHeader')} - официальный интернет-магазин aoc-gaming.ru ( Игровые мониторы AGON BY AOC и морниторы для дома и офиса AOC) в России с официальной гарантией и доставкой по всей России.">
+    {/if}
+
+
+    {* Установка Viewport *}
+
+    {if $wa->isMobile()}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    {else}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {/if}
+
+
+    {* Canonical плагина «Link Canonical» *}
+    {if !empty($canonical)}
+    <link rel="canonical" href="{$canonical|escape}">
+    {/if}
+    {$wa->block("shop.seo_pagination")}
+    {* КОНЕЦ Canonical плагина «Link Canonical» *}
+
+    {* Стиль темы основной*}
+    <link href="{$wa_theme_url}css/evnia.css?v={$wa_theme_version}" rel="stylesheet" type="text/css">
+    
+    {$wa->css()|replace:$find:$repl} {* Вставка CSS плагинов вебасиста *}
+
+    {* js скрипты *}
+
+    <!-- js-custom -->
+    <script src="{$wa_static_url}wa-content/js/jquery/jquery-1.11.1.min.js"></script>
+    <script src="{$wa_static_url}wa-content/js/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://aoc-gaming.ru/wa-apps/shop/plugins/callb/js/jquery.maskedinput.min.js"></script>
+    <!-- end-js-custom -->
+
+    <!-- start-js -->
+    {$wa->js()|replace:$find:$repl} {* Вставка JS плагинов вебасиста *}
+    <!-- end-js -->
+
+    <!-- start-head -->
+    {$wa->head()|replace:$find:$repl} {* links Google Analytics tracking code and current site's custom JS (Site app) *}
+    <!-- end-head -->
+
+    <!--[if lt IE 9]>
+    <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('figure');
+        document.createElement('hgroup');
+        document.createElement('menu');
+    </script>
+    <![endif]-->
+
+    {$wa->block("AGONBYAOC_HEAD")}
+
+    {include file="`$wa_active_theme_path`/head.html" inline}
+
+</head>
+<body id="{$wa_app}">
+
+{*
+<div class="highlighted margin-auto tab">
+    <div class="container margin-horizontal-0_5rem">Уважаемые покупатели! Режим работы в праздники можно узнать по кнопке &nbsp;  &nbsp;<a href="https://aoc-gaming.ru/rezhim-raboty-v-prazdniki/" class="button button-color">Подробнее</a></div>
+</div>
+*}
+
+{if isset($frontend_homepage) && $theme_settings.mainpage_h1}<h1 class="hidden-title-h1">{$theme_settings.mainpage_h1}</h1>{/if}
+
+{include file="header.html" inline}
+{include file="nav.html" inline}
+<main>
+    {include file="`$wa_active_theme_path`/content.html" inline}
+</main>
+{include file="club-call.html" inline}
+{include file="email-distribution.html" inline}
+
+{include file="footer.html" inline}
+
+{$wa->block("AGONBYAOC_FOOTER")}
+
+<script src="{$wa_theme_url}js/app.min.js?v={$wa_theme_version}{$theme_settings.theme_version_images_reset}"></script>
+
+<script>
+    let succesArrived = "ym(39635740,'reachGoal','succes_arrived')";
+    let elementsArrived = document.getElementsByClassName("plugin_arrived-button");
+
+    let openArrivedWindows = function () {
+        ym(39635740, 'reachGoal', 'open_arrived_windows');
+        let elementsForm = document.getElementsByClassName("plugin_arrived-value submit");
+        for (var i = 0; i < elementsForm.length; i++) {
+            elementsForm[i].innerHTML = '<input type="submit" value="Уведомить меня" onclick="' + succesArrived + '"><div class="plugin_arrived-loading">Проверка...</div>';
+        }
+    };
+
+    for (var i = 0; i < elementsArrived.length; i++) {
+        elementsArrived[i].addEventListener('click', openArrivedWindows, false);
+    }
+
+
+    function onCheckedFilter(codename, value) {
+        let checkBoxCode = codename + '_' + value;
+        if (document.getElementById(checkBoxCode).checked === true) {
+
+            let fastFilter = document.getElementById("fast-filter");
+            let valueFilter = document.getElementById("value-" + checkBoxCode);
+
+            toogleClass('.filters-show-button', 'unhidden', 'hidden');
+            toogleClass('.' + checkBoxCode, 'hidden', 'unhidden');
+            console.log(valueFilter.innerHTML);
+
+            fastFilter.innerHTML = fastFilter.innerHTML + '<li><button class="button button-grey fast-filter_button" id="button_' + checkBoxCode + '">' + valueFilter.innerHTML + '</button></li>';
+        } else {
+            toogleClass('.filters-show-button', 'unhidden', 'hidden');
+        }
+    }
+
+    function onClickClose(elem, del_elem) {
+        document.addEventListener('click', function (e) {
+            if (e.target.id == elem) {
+                removeClass(document.getElementById(elem), del_elem);
+            }
+            if (e.target.id == elem && del_elem == '') {
+                removeClass(document.getElementById(elem), 'unhidden');
+                addClass(document.getElementById(elem), 'hidden');
+            }
+        });
+    }
+
+    const FADE_DUR = 700, MIN_DUR = 3000;
+    let toastContain;
+
+    function toast(str, addClass) {
+        let duration = Math.max(MIN_DUR, str.length * 30);
+
+        if (!toastContain) {
+            toastContain = document.createElement('div');
+            toastContain.classList.add('toastContain');
+            document.body.appendChild(toastContain);
+        }
+
+        const EL = document.createElement('div');
+        EL.classList.add('toast', addClass);
+        EL.innerHTML = str;
+        toastContain.prepend(EL);
+
+        setTimeout(() => EL.classList.add('open'));
+        setTimeout(
+            () => EL.classList.remove('open'),
+            duration
+        );
+        setTimeout(
+            () => toastContain.removeChild(EL),
+            duration + FADE_DUR
+        );
+    }
+
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    function setCookie(name, value, options = {}) {
+        options = {
+            path: '/',
+        };
+
+        if (options.expires instanceof Date) {
+            options.expires = options.expires.toUTCString();
+        }
+
+        let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+        for (let optionKey in options) {
+            updatedCookie += "; " + optionKey;
+            let optionValue = options[optionKey];
+            if (optionValue !== true) {
+                updatedCookie += "=" + optionValue;
+            }
+        }
+
+        document.cookie = updatedCookie;
+    }
+
+    function deleteCookie(name) {
+        setCookie(name, '', {
+            'max-age': -99999999
+        });
+    }
+
+    function addCompare(id, name) {
+        let obj = getCookie('shop_compare');
+        let flag = false;
+        let counter = document.getElementById("compare-counter").innerText;
+
+        if (typeof (obj) != 'undefined' && obj != null && obj != '') {
+            const compareRez = obj.split(",");
+            compareRez.forEach(function (item) {
+                if (item == id) {
+                    flag = true;
+                }
+            });
+            if (flag == true) {
+                return;
+            }
+            obj += ',' + id;
+            setCookie('shop_compare', obj);
+        } else {
+            obj = id;
+            setCookie('shop_compare', obj);
+        }
+
+        counter = parseInt(counter) + 1;
+        document.getElementById("compare-counter").innerText = counter;
+        if (counter == 1) {
+            toogleClass('#compare-counter', 'hidden', 'unhidden');
+        }
+
+        toast('<p id="popup-menu-info_product-name">' + name + ' добавлен к сравнению.</p><a class="button" href="/compare/">Перейти к сравнению</a>');
+    }
+
+    function compareCheck() {
+        let obj = getCookie('shop_compare');
+        if (typeof (obj) != 'undefined' && obj != null && obj != '') {
+            const compareRez = obj.split(",");
+            compareRez.forEach(function (item) {
+                if (typeof (item) != 'undefined' && item != null && item != '') {
+                    toogleClass('.compare-button-' + item, 'unhidden', 'hidden');
+                    toogleClass('.uncompare-button-' + item, 'hidden', 'unhidden');
+                }
+            });
+        } else {
+            deleteCookie('shop_compare');
+        }
+    }
+
+    function removeCompare(id, name) {
+
+        let obj = getCookie('shop_compare');
+        const compareRez = obj.split(",");
+        let myArr = [];
+        let counter = document.getElementById("compare-counter").innerText;
+        let timerPopup;
+
+        compareRez.forEach(function (item) {
+            if (item != id) {
+                if (typeof (item) != 'undefined' && item != null && item != '') {
+                    myArr.push(item);
+                }
+            }
+        });
+        setCookie('shop_compare', myArr);
+        if (myArr == '') {
+            compareCheck();
+        }
+        counter = parseInt(counter) - 1;
+        document.getElementById("compare-counter").innerText = counter;
+        if (counter == 0) {
+            toogleClass('#compare-counter', 'unhidden', 'hidden');
+        }
+        toast(name + ' удален из сравнения.', 'critical');
+    }
+
+    function addClass(element, className) {
+        element.className += ' ' + className;
+    }
+
+    function removeClass(element, className) {
+        element.className = element.className.replace(
+            new RegExp('( |^)' + className + '( |$)', 'g'), ' ').trim();
+    }
+
+    function toogleClass(find, condition, newcondition) {
+        const findClasses = document.querySelectorAll(find);
+        findClasses.forEach(element => {
+            element.classList.add(newcondition);
+            element.classList.remove(condition);
+        });
+    }
+</script>
+
+{if $wa_app == "shop" &&  $action == "product" }
+<script>
+    function scrollBgEffect(BgItem) {
+        document.addEventListener('scroll', () => {
+            const elem = document.querySelectorAll(BgItem);
+            const startPoint = Math.round(window.innerHeight*0.75);
+            const middlePoint = Math.round(window.innerHeight*0.50);
+            const lastPoint = Math.round(window.innerHeight*0.25);
+            elem.forEach(item => {
+                let rect = item.getBoundingClientRect();
+                if( Math.round(rect.y) < startPoint) {
+                    item.style.transform = "scale(1.15)"
+                }
+                if( Math.round(rect.y) < middlePoint) {
+                    item.style.transform = "scale(1.35)"
+                }
+                if( Math.round(rect.y) < lastPoint) {
+                    item.style.transform = "scale(1.55)"
+                }
+            })
+        });
+    }
+    scrollBgEffect('.info-product__content-bg__img');
+</script>
+{/if}
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ElectronicsStore",
+        "name": "Официальный интернет магазин мониторов AOC в России",
+        "image": "https://aoc-gaming.ru/wa-apps/site/themes/agonbyaoc/img/logo.png",
+        "@id": "",
+        "url": "https://aoc-gaming.ru/",
+        "telephone": "+7 (495) 115-84-51",
+        "priceRange": "$$$$",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "улица Космонавта Волкова, 10, стр. 1",
+            "addressLocality": "Москва",
+            "postalCode": "127299",
+            "addressCountry": "RU"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 55.815413,
+            "longitude": 37.514805
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+            ],
+            "opens": "9:00",
+            "closes": "18:00"
+        },
+        "sameAs": [
+            "https://www.youtube.com/channel/UCRI6KrKBCWLvTQHc53rUbQQ",
+            "https://www.instagram.com/gamingsolutions_official/",
+            "https://aoc-gaming.ru/",
+            "https://vk.com/gamingsolutions",
+            "https://www.tiktok.com/@gamingsol?",
+            "http://www.facebook.com/gamingsolutions.official/"
+        ]
+    }
+</script>
+</body>
+</html>
+{/strip}

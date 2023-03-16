@@ -1,0 +1,120 @@
+.login_registration_fogot-password {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  & h1 {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+  & .wa-auth-adapters {
+    width: 50%;
+    margin: 0 2.5rem 0 0;
+    & ul {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      width: 100%;
+      @media (min-width: 1250px) {
+        width: 70%;
+      }
+      @media (min-width: 1550px) {
+        width: 70%;
+      }
+      & li {
+        flex-grow: 1;
+      }
+    }
+  }
+  & .wa-signup-form-wrapper, & .wa-login-form-wrapper{
+    width: 40%;
+  }
+  &__content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: no-wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background: var(--white-10);
+    padding: 5rem 2.5rem;
+    border-radius: var(--border-radius);
+    @media (min-width: 1850px) {
+      width: 75rem;
+    }
+  }
+}
+
+.wa-login-form-wrapper input[type="text"], .wa-login-form-wrapper input[type="email"], .wa-login-form-wrapper input[type="password"], .wa-forgotpassword-form-wrapper input[type="text"], .wa-forgotpassword-form-wrapper input[type="email"], .wa-forgotpassword-form-wrapper input[type="password"],.wa-signup-form-wrapper input[type="text"], .wa-signup-form-wrapper input[type="email"], .wa-signup-form-wrapper input[type="password"] {
+  width: 100% !important;
+  border: var(--border-size-input) solid var(--white-35) !important;
+  padding: 0 1rem !important;
+}
+
+.wa-login-form-wrapper input[type="text"].wa-error, .wa-login-form-wrapper input[type="email"].wa-error, .wa-login-form-wrapper input[type="password"].wa-error, .wa-forgotpassword-form-wrapper input[type="text"].wa-error, .wa-forgotpassword-form-wrapper input[type="email"].wa-error, .wa-forgotpassword-form-wrapper input[type="password"].wa-error,.wa-signup-form-wrapper input[type="text"].wa-error, .wa-signup-form-wrapper input[type="email"].wa-error, .wa-signup-form-wrapper input[type="password"].wa-error {
+  width: 100% !important;
+  border: var(--border-size-input) solid var(--white-35) !important;
+  padding: 0 1rem !important;
+}
+
+.wa-forgotpassword-form-fields .wa-field-login  .wa-value {
+  display: flex;
+  flex-direction: row;
+}
+
+.wa-login-form-wrapper input, .wa-login-form-wrapper select, .wa-login-form-wrapper textarea, .wa-signup-form-wrapper input, .wa-signup-form-wrapper select, .wa-signup-form-wrapper textarea, .wa-forgotpassword-form-wrapper input, .wa-forgotpassword-form-wrapper select, .wa-forgotpassword-form-wrapper textarea {
+  border-color: transparent !important;
+}
+.wa-login-form-wrapper input:hover, .wa-login-form-wrapper select:hover, .wa-login-form-wrapper textarea:hover, .wa-signup-form-wrapper input:hover, .wa-signup-form-wrapper select:hover, .wa-signup-form-wrapper textarea:hover, .wa-forgotpassword-form-wrapper input:hover, .wa-forgotpassword-form-wrapper select:hover, .wa-forgotpassword-form-wrapper textarea:hover {
+  border-color: transparent !important;
+}
+
+.s-orders-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+  & details.s-order-item {
+    border: var(--border-size-input) solid var(--white-15);
+    border-radius: 4px;
+    margin: 0 auto 1rem auto;
+    padding: 0;
+    width: 100%;
+    & summary {
+      font-weight: bold;
+      padding: 1rem;
+      line-height: 1.6rem;
+      cursor:pointer;
+    }
+
+    & .s-order-list {
+      color: var(--white-95);
+      & .goods-list {
+        list-style: none;
+        & li {
+          padding-bottom: .5rem;
+        }
+      }
+    }
+
+    &[open] {
+      border: var(--border-size-input) solid var(--base-color-dark-hover);
+      details.s-order-item::marker {
+        color: var(--base-color-dark-hover);
+      }
+    }
+    &[open] summary {
+      border-bottom: var(--border-size-input) solid var(--base-color-dark-hover);
+      margin-bottom: .5em;
+    }
+  }
+
+}

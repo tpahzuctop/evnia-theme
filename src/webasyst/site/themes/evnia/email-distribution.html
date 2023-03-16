@@ -1,0 +1,11 @@
+<section class="email-distribution margin__big_vertical">
+  <div class="email-distribution__container container">
+    <div class="email-distribution__description">
+      <h3 class="email-distribution__title">Будь в курсе!</h3>
+      <span class="email-distribution__subtitle">Получайте самые интересные предложения первыми!</span>
+    </div>
+    <div id="email-distribution__form-custom" class="email-distribution__form">
+      {$wa->mailer->form(1)|replace:'wa-submit':'wa-submit button button-grey'}
+    </div>
+  </div>
+</section>

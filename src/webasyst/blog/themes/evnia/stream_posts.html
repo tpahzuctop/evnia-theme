@@ -1,0 +1,39 @@
+{* post list: default view mode *}
+
+{foreach $posts as $post}
+
+<article class="clubs-post" id="post-{$post.id}" {if $wa->param('blog_url')}itemprop="blogPosts" {/if}itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="clubs-post__description margin__medium_horizontal">
+        <h3>
+            <a href="{$post.link}" itemprop="url" alt="Сотрудничество с клубами, {$post.title}" title="Сотрудничество с клубами, {$post.title}">{$post.title}</a>
+            {* @event prepare_posts_frontend.%plugin_id%.post_title *}
+            {if !empty($post.plugins.post_title)}
+            {foreach $post.plugins.post_title as $plugin => $output}{$output}{/foreach}
+            {/if}
+        </h3>
+        <blockquote>
+        {blogShortcontentsPlugin::getShortContent($post.id)}
+        </blockquote>
+
+        <div class="clubs-post__btn">
+            <a href="{$post.link}" alt="Сотрудничество с клубами, {$post.title}" title="Сотрудничество с клубами, {$post.title}" class="button button-grey">Подробнее</a>
+        </div>
+    </div>
+
+    <div class="clubs-post__img-container">
+
+        <picture class="clubs-post__img">
+            <source type="image/webp" data-srcset="{$post.photo}">
+            <img data-src="{$post.photo}" alt="Сотрудничество с игровыми клубами AGON BY AOC, {$post.title}" title="Сотрудничество с игровыми клубами AGON BY AOC, {$post.title}" class="lazyload">
+        </picture>
+
+    </div>
+
+</article>
+
+{foreachelse}
+    {if $page lt 2}
+        {_w('%d post','%d posts',0)}
+    {/if}
+{/foreach}

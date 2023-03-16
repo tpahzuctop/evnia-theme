@@ -1,0 +1,19 @@
+<!-- plugin hook: 'frontend_nav' -->
+{* @event frontend_nav.%plugin_id% *}
+{foreach $frontend_nav as $_}{$_}{/foreach}
+
+<!-- plugin hook: 'frontend_nav_aux' -->
+{* @event frontend_nav_aux.%plugin_id% *}
+{foreach $frontend_nav_aux as $_}{$_}{/foreach}
+
+{* <!-- product search
+<div class="search">
+    <form method="get" action="{$wa->getUrl('/frontend/search')}">
+    <input type="search" name="query" {if !empty($query)}value="{$query}"{/if} id="search" placeholder="[`Find products`]">
+    </form>
+</div>        
+--> *}
+{* Display category filters *}
+{if !empty($category) && !empty($filters)}
+{include file="./category.filters.html" inline}
+{/if}

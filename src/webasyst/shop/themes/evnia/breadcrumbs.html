@@ -1,0 +1,60 @@
+{strip}
+<nav aria-label="Breadcrumb" class="breadcrumb padding__medium_vertical">
+    <ul itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="{$wa_app_url}" itemprop="item"><span itemprop="name">Главная</span></a>
+            <meta itemprop="position" content="{counter}">
+        </li>
+
+        {if "/" != $wa->currentUrl()}
+
+                {if $category.name}
+                {$pageName = $category.name}
+                {else}
+                    {if $page.name}
+                    {$pageName = $page.name}
+                    {else}
+                    {$pageName = $wa->title()}
+                    {/if}
+                {/if}
+
+        {if !empty($breadcrumbs)}
+                {foreach $breadcrumbs as $breadcrumb}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="{$breadcrumb.url}" itemprop="item">
+                        <span itemprop="name">{$breadcrumb.name|escape}</span>
+                        <meta itemprop="position" content="{counter}">
+                    </a>
+                </li>
+                {/foreach}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="{$wa->currentUrl()}" itemprop="item">
+                        <span itemprop="name">{$pageName|escape} {shopSeofilterHelper::getSeoName()}</span>
+                        <meta itemprop="position" content="{counter}">
+                    </a>
+                </li>
+                {else}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a href="{$wa->currentUrl()}" itemprop="item">
+                        <span itemprop="name">{$pageName|escape} {shopSeofilterHelper::getSeoName()}</span>
+                        <meta itemprop="position" content="{counter}">
+                    </a>
+                </li>
+                {/if}
+        {/if}
+    </ul>
+</nav>
+
+<h1 class="category-name">
+    {$category.name|escape} {shopSeofilterHelper::getSeoName()}
+</h1>
+    <ul class="fast-filter" id="fast-filter">
+        {if $category.subcategories}
+        <!-- subcategories -->
+            {foreach $category.subcategories as $sc}
+                <li><a href="{$sc.url}" class="button button-grey">{$sc.name|escape}</a></li>
+            {/foreach}
+        {/if}    
+    </ul>
+
+{/strip}
