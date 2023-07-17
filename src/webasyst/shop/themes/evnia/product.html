@@ -67,7 +67,8 @@
         <article class="product-short-info container">
             <h1 itemprop="name">
                 {foreach $product.skus as $sku}
-                {$product.name}
+                {$product.name|replace:$sku.sku:' '}
+                <span>{$sku.sku}</span>
                 {/foreach}
                 {if !empty($product.rating) && $product.rating > 0}
                 <span class="rating nowrap" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" title="{sprintf('[`Average user rating: %s / 5`]', $product.rating)}">
